@@ -1,0 +1,105 @@
+html,
+body {
+    background-color: #fff;
+    color: #636b6f;
+    font-family: 'Droid Arabic kufi';
+    font-weight: 200;
+    /* height: 100vh; */
+    margin: 0;
+}
+
+a {
+    color: goldenrod;
+    text-decoration: none;
+
+}
+
+a:hover {
+    color: gold;
+}
+
+.btn-xs {
+    padding: 5px 5px;
+    font-size: 7px;
+}
+
+.bg-golden {
+    background-color: goldenrod;
+}
+
+.white {
+    color: white !important;
+}
+
+.main-head {
+    height: 150px;
+    background: #FFF;
+}
+
+.sidenav {
+    height: 100%;
+    /* background-color: #000; */
+    overflow: hidden;
+    padding-top: 20px;
+}
+
+.main {
+    padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 0px;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .login-form {
+        margin-top: 20%;
+    }
+
+    .register-form {
+        margin-top: 10%;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .main {
+        margin-right: 30%;
+    }
+
+    .sidenav {
+        width: 30%;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        right: 0;
+    }
+
+    .login-form {
+        margin-top: 20%;
+    }
+
+    .register-form {
+        margin-top: 20%;
+    }
+}
+
+.login-main-text {
+    /* margin-top: 5%; */
+    padding: 60px;
+    color: #fff;
+}
+
+.login-main-text h2 {
+    font-weight: 300;
+}
+
+.btn-black {
+    background-color: #000 !important;
+    color: #fff;
+}
+
+.btn-black:hover {
+    color: gold !important;
+}
