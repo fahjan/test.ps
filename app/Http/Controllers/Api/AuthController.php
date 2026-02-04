@@ -37,7 +37,7 @@ class AuthController extends Controller
         }
 
         throw ValidationException::withMessages([
-            'mobile' => [__('Make sure of your mobile number and password ')],
+            'message' => [__('Make sure of your mobile number and password ')],
         ]);
 
 
