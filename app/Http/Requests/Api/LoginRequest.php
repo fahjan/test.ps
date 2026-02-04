@@ -27,7 +27,7 @@ class LoginRequest extends FormRequest
         return [
             'mobile' => ['required', Rule::phone()->country(config('services.countries'))],
             'password' => 'required|string|max:199|min:4',
-            'device_name' => ['required', 'string'],
+            'device_info' => ['required', 'string'],
 
         ];
     }

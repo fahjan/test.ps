@@ -25,6 +25,10 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             // Authentication successful...
+            auth()->user()->update([
+                'device_info' => $request->device_info,
+            ]);
+
             $user = Auth::user();
             $user->load(['roles', 'students.school', 'managers.school', 'trainers.school']);
 
