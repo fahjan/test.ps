@@ -35,7 +35,7 @@ class Managers extends Controller
      */
     public function create()
     {
-        $schools = School::orderBy('title')->get()->pluck('title', 'id');
+        $schools = School::orderBy('title')->get();
 
         return view($this->route . 'create', compact('schools'));
     }
@@ -46,21 +46,21 @@ class Managers extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    
+
     public function store(Request $request)
     {
         $user = [];
 
-        $user['mobile']     = phone($request->mobile, config('services.countries'));
-        $user['id_number']  = $request->id_number;
-        $user['name']       = $request->name;
+        $user['mobile'] = phone($request->mobile, config('services.countries'));
+        $user['id_number'] = $request->id_number;
+        $user['name'] = $request->name;
 
         if ($request->has('password')) {
             $password = $request->password;
         } else {
             $password = mt_rand(1111, 9999);
         }
-        $user['password']   = Hash::make($password);
+        $user['password'] = Hash::make($password);
 
 
 
@@ -71,7 +71,7 @@ class Managers extends Controller
         Manager::updateOrCreate(['school_id' => $request->school_id, 'user_id' => $created_user->id], ['photo' => $photo]);
 
 
-        $created_user->notify(new SendPassword(['message' => 'اسم المستخدم: ' . $request->mobile . '.' . 'كلمة المرور: ' . $request->password]));
+        $created_user->notify(new SendPassword(['message' => 'اسم المستخدم: ' . $request->mobile . '.' . 'كلمة المرور: ' . $password]));
         // auth()->user()->notify(new SendPassword(['message' => 'اسم المستخدم' . $request->mobile . '.' . 'كلمة المرور: ' . $request->password]));
 
         return redirect(route($this->route . 'index'));
@@ -113,12 +113,12 @@ class Managers extends Controller
     {
         $user = [];
 
-        $user['mobile']     = phone($request->mobile, config('services.countries'));
-        $user['id_number']  = $request->id_number;
-        $user['name']       = $request->name;
+        $user['mobile'] = phone($request->mobile, config('services.countries'));
+        $user['id_number'] = $request->id_number;
+        $user['name'] = $request->name;
 
         if (isset($request->password)) {
-            $user['password']   = Hash::make($request->password);
+            $user['password'] = Hash::make($request->password);
         }
 
         $created_user = User::updateOrCreate(['mobile' => $user['mobile']], $user);

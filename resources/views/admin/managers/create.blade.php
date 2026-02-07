@@ -53,7 +53,7 @@
 
                                         <select name="school_id" id="school_id" required class="form-control">
                                             @foreach($schools as $school)
-                                                <option value="{{$school->id}}" {{$school->id == old('school_id', $object->school_id ?? 0) ? 'selected' : ''}}>
+                                                <option value="{{ $school->id }}" {{ $school->id == old('school_id', $object->school_id ?? 0) ? 'selected' : ''}}>
                                                     {{$school->title}}
                                                 </option>
                                             @endforeach
@@ -135,7 +135,7 @@
                                 <div class="col-md -pr-1">
                                     <div class="form-group">
                                         <label>{{__('public.password')}}</label>
-                                        <input -required name="password"
+                                        <input -required name="password" required
                                             value="{{old('password', $manager->password ?? '')}}"
                                             placeholder="{{__('public.password')}}" type="text"
                                             class="form-control  {{ $errors->has('password') ? ' is-invalid' : ' ' }}">

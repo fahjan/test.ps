@@ -34,4 +34,43 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('student')->middleware(['role:student'])->group(function () {
 
     });
+
+
+
+});
+
+Route::get('/sounds', function () {
+    set_time_limit(-1);
+    for ($i = 1; $i <= 749; $i++) {
+        $fileName = 'questions/' . $i . '.mp3';
+        if (Storage::disk('public')->exists($fileName)) {
+            continue;
+        }
+
+        $response = Http::get("https://eservices.mot.ps/voice-test/public/sounds/$i/$i.mp3");
+        if ($response->successful()) {
+            // 2. Generate a unique filename
+
+
+            // 3. Store the audio content
+            Storage::disk('public')->put($fileName, $response->body());
+        }
+        $response = Http::get("https://eservices.mot.ps/voice-test/public/sounds/$i/a1.mp3");
+        if ($response->successful()) {
+            // 2. Generate a unique filename
+            $fileName = 'answers/' . $i . '-1' . '.mp3';
+
+            // 3. Store the audio content
+            Storage::disk('public')->put($fileName, $response->body());
+        }
+        $response = Http::get("https://eservices.mot.ps/voice-test/public/sounds/$i/a2.mp3");
+        if ($response->successful()) {
+            // 2. Generate a unique filename
+            $fileName = 'answers/' . $i . '-2' . '.mp3';
+
+            // 3. Store the audio content
+            Storage::disk('public')->put($fileName, $response->body());
+        }
+    }
+
 });
