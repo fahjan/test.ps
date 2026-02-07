@@ -25,7 +25,7 @@ class Cars extends Controller
     {
 
         // dd(auth()->user()->school->id);
-        $objects = myObject::with(['trainer', 'vehicletype'])->school()->search()->sortable()->latest()->paginate()->appends(request()->except('page'));
+        $objects = myObject::with(['trainer', 'vehicletype'])->school()->search()->latest()->paginate()->appends(request()->except('page'));
         return view($this->route . 'index', compact('objects'));
     }
 
