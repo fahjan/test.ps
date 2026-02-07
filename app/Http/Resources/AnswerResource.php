@@ -15,6 +15,7 @@ class AnswerResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'id' => $this->id,
             'exam_id' => $this->exam_id,
             'question_id' => $this->question_id,
             'answer' => $this->answer,
