@@ -32,6 +32,7 @@ class StudentResource extends JsonResource
             'school' => new SchoolResource($this->school),
             'percent' => $this->percent,
             'mobile' => $this->user->mobile,
+            'exams' => ExamResource::collection($this->exams),
 
         ];
     }

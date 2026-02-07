@@ -29,7 +29,6 @@ class UserResource extends JsonResource
             'roles' => RoleResource::collection($this->roles),
             'managers' => ManagerResource::collection($this->managers),
             'trainers' => TrainerResource::collection($this->trainers),
-            'exams' => ExamResource::collection($this->exams),
         ];
     }
 }
