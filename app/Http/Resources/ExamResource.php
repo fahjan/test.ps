@@ -21,7 +21,7 @@ class ExamResource extends JsonResource
             'finished_at' => $this->finished_at,
             'application' => $this->application,
             'student_id' => $this->student_id,
-            'grade' => (float) $this->grade,
+            'grade' => $this->grade,
             'questions_count' => $this->questions_count,
             'answers' => AnswerResource::collection($this->answers),
         ];
