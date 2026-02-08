@@ -5,10 +5,11 @@
         <form action="{{ route($route . 'update', $object->id) }}" method="post" enctype="multipart/form-data">
             @method('put')
             <input type="hidden" name="id" value="{{ $object->id }}">
+
     @else
             <form action="{{ route($route . 'store') }}" method="post" enctype="multipart/form-data">
         @endisset
-
+            @csrf
 
             <div class="row">
 

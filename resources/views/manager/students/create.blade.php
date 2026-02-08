@@ -15,6 +15,7 @@
 @else
         <form action="{{ route($route . 'store') }}" method="post" enctype="multipart/form-data">
     @endisset
+        @csrf
 
 
         <div class="row">
