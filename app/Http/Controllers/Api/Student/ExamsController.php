@@ -28,7 +28,7 @@ class ExamsController extends Controller
             Answer::insertOrIgnore($request->answers);
             return true;
         } catch (\Throwable $th) {
-            throw $th;
+            // throw $th;
         }
 
     }
