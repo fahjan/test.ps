@@ -48,13 +48,14 @@
 		</div>
 		<div class="card">
 			<div class="card-header">
-				<h4 class="card-title float-left"> {{__('public.students')}} ({{$objects->total()}})</h4>
+				<h4 class="card-title float-left"> {{__('public.students')}} ({{ $objects->total() }})</h4>
 				<div class="float-right">
 					<a href="{{route('manager.students.create')}}" class="btn btn-success">
 						<i class="fa fa-plus"></i> {{__('public.new_student')}}
 					</a>
 				</div>
 			</div>
+
 			<div class="card-body">
 				<div class="table-responsive ">
 					<table class="table -table-striped -table-dark table-hover ">
@@ -166,10 +167,10 @@
 														href="{{route('manager.students.reset_password', $object->id)}}">
 														<i class="fa fa-key"></i> {{__('public.send_password')}}
 													</a>
-													<a class="dropdown-item"
+													{{-- <a class="dropdown-item"
 														href="{{route('manager.students.unfreez', $object->id)}}">
 														<i class="fa fa-check-circle-o"></i> {{__('Unfreeze')}}
-													</a>
+													</a> --}}
 
 
 													@if($object->lessons_count == 0 && $object->payments_count == 0)
