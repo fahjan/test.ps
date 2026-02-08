@@ -23,13 +23,14 @@ class ExamsController extends Controller
      */
     public function store(Request $request)
     {
-        return [
-            'exams' => $request->exams,
-            'answers' => $request->answers,
-        ];
-        Exam::insert($request->exams);
-        Answer::insert($request->answers);
-        return true;
+        try {
+            Exam::insert($request->exams);
+            Answer::insert($request->answers);
+            return true;
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+
     }
 
 
