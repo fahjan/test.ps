@@ -78,8 +78,8 @@ class Students extends Controller
     public function create()
     {
         $trainers = Trainer::with(['user', 'jobs'])->school()->get();
-        $cities = City::all();
-        $licenses = License::all();
+        $cities = City::get();
+        $licenses = License::get();
         return view($this->route . 'create', compact('trainers', 'cities', 'licenses'));
     }
 
