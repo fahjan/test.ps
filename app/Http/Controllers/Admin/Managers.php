@@ -96,7 +96,7 @@ class Managers extends Controller
      */
     public function edit($id)
     {
-        $schools = School::orderBy('title')->get()->pluck('title', 'id');
+        $schools = School::orderBy('title')->get();
         $manager = Manager::with(['user'])->whereId($id)->firstOrFail();
 
         return view($this->route . 'create', compact('schools', 'manager'));
