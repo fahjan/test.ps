@@ -32,6 +32,12 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     Route::prefix('student')->middleware(['role:student'])->group(function () {
+        Route::resource('students.exams', App\Http\Controllers\Api\Student\ExamsController::class)->only('store', 'index');
+        //     Route::resources([
+        //         'students' => App\Http\Controllers\Api\Manager\Students::class,
+        // ]);
+
+
 
     });
 
