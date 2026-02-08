@@ -78,8 +78,8 @@ class Students extends Controller
     public function create()
     {
         $trainers = Trainer::with(['user', 'jobs'])->school()->get();
-        $cities = City::get();
-        $licenses = License::get();
+        $cities = City::all();
+        $licenses = License::all();
         return view($this->route . 'create', compact('trainers', 'cities', 'licenses'));
     }
 
@@ -184,8 +184,8 @@ class Students extends Controller
     {
         // dd(__('validation.attributes.')); //prev_license
         $trainers = Trainer::with('user')->school()->get();
-        $cities = City::all()->pluck('title', 'id');
-        $licenses = License::all()->pluck('title', 'id');
+        $cities = City::all();
+        $licenses = License::all();
         $object = Student::with(['user'])->whereId($id)->firstOrFail();
         return view($this->route . 'create', compact('trainers', 'cities', 'licenses', 'object'));
     }
