@@ -24,8 +24,8 @@ class ExamsController extends Controller
     public function store(Request $request)
     {
         try {
-            Exam::insert($request->exams);
-            Answer::insert($request->answers);
+            Exam::insertOrIgnore($request->exams);
+            Answer::insertOrIgnore($request->answers);
             return true;
         } catch (\Throwable $th) {
             throw $th;
