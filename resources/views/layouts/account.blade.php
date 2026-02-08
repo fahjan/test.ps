@@ -165,12 +165,12 @@
 						</a>
 					</li>
 
-					<li class="{{Request::is('*/manager/messages*') ? 'active' : ''}}">
+					{{-- <li class="{{Request::is('*/manager/messages*') ? 'active' : ''}}">
 						<a href="{{route('manager.messages.index')}}">
 							<i class="fa fa-envelope-open"></i>
 							<p>{{(__('public.sms'))}} </p>
 						</a>
-					</li>
+					</li> --}}
 
 					{{-- <li class="{{Request::is('*/manager/students*') ? 'active' : ''}}">
 						<a href="{{route('manager.students.index')}}?active">
