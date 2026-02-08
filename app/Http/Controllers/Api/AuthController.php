@@ -30,7 +30,7 @@ class AuthController extends Controller
             ]);
 
             $user = Auth::user();
-            $user->load(['roles', 'students.school', 'students.exams.answers', 'managers.school', 'trainers.school']);
+            $user->load(['roles', 'students.school', 'students.license', 'students.exams.answers', 'managers.school', 'trainers.school']);
 
             // $user->load(['students.exams.answers']);
 
