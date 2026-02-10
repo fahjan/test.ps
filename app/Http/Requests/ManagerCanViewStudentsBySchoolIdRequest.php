@@ -22,15 +22,21 @@ class ManagerCanViewStudentsBySchoolIdRequest extends FormRequest
      */
     public function rules(): array
     {
+        $allowedSchoolIds = auth()->user()->managers()->pluck('school_id')->toArray();
+
         return [
             'school_id' => [
                 'required',
-                Rule::exists('schools', 'id')->where(function ($query) {
-                    // نتحقق أن المدرسة مرتبطة بالمدير الحالي عبر جدول المنيجرز
-                    $query->whereHas('managers', function ($q) {
-                        $q->where('id', auth()->id());
-                    });
-                }),
+                // Rule::exists('schools', 'id')->where(function ($query) {
+                //     // نتحقق أن المدرسة مرتبطة بالمدير الحالي عبر جدول المنيجرز
+                //     $query->whereHas('managers', function ($q) {
+                //         $q->where('id', auth()->id());
+                //     });
+                // }),
+                Rule::in($allowedSchoolIds),
+
+
+
             ],
         ];
     }
