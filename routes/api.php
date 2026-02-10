@@ -19,7 +19,7 @@ Route::middleware(['auth:sanctum', 'arabic_numbers'])->group(function () {
 
     Route::prefix('manager')->middleware(['role:manager'])->group(function () {
 
-        Route::resources([
+        Route::apiResources([
             'students' => App\Http\Controllers\Api\Manager\Students::class,
             // 'trainers' => App\Http\Controllers\Manager\Trainers::class,
             // 'cars' => App\Http\Controllers\Manager\Cars::class,
