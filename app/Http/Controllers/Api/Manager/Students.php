@@ -61,41 +61,34 @@ class Students extends Controller
         $user['password'] = Hash::make($password);
 
 
-        $created_user = User::firstOrCreate(['mobile' => $user['mobile']], $user);
-        $created_user->assignRole(['student']);
-
-        $photo = $request->hasFile('avatar') ? $request->file('avatar')->store('students/' . Carbon::now()->format('Y-m-d')) : $request->photo;
-
-
+        $created_user = User::
+            where('mobile', $user['mobile'])
+            ->orWhere('id_number', $user['id_number'])
+            ->firstOr(fn() => User::create($user));
 
 
-        $data['photo'] = $photo;
         $data['archive_number'] = $request->archive_number ?? $school->id . '-' . (Student::where('school_id', $school->id)->count() + 1);
+
         Student::create(
             [
                 'school_id' => $school->id,
                 'user_id' => $created_user->id,
-                'use_app' => $request->use_app ?? 'no',
-
-            ] + $data
+            ] + $data,
 
         );
 
+        $sms_provider = [];
 
-
-        if (config('services.sms_on_registration') && ($request->send_password == 'yes' || $request->use_app == 'yes')) {
-            // if (config('services.sms_on_registration') && $request->filled('send_password')) {
-            $sms_provider = [];
-
-            if ($school->sms_sender != '') {
-                $sms_provider = [
-                    'sender' => $school->sms_sender,
-                    'secret' => $school->sms_secret,
-                    'key' => $school->sms_key,
-                ];
-            }
-            $created_user->notify(new SendPassword(['message' => 'اسم المستخدم: ' . ltrim($user['mobile'], '97') . ' : ' . 'كلمة المرور: ' . $password . ', ' . url('/app')], $sms_provider));
+        if ($school->sms_sender != '') {
+            $sms_provider = [
+                'sender' => $school->sms_sender,
+                'secret' => $school->sms_secret,
+                'key' => $school->sms_key,
+            ];
         }
+
+        $created_user->notify(new SendPassword(['message' => 'اسم المستخدم: ' . ltrim($user['mobile'], '97') . ' : ' . 'كلمة المرور: ' . $password . ', ' . url('/app')], $sms_provider));
+
     }
 
 
