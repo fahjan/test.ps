@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Manager;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateStudentRequest;
+use App\Http\Requests\DeleteStudentRequest;
 use App\Http\Requests\ManagerCanViewStudentsBySchoolIdRequest;
 use App\Http\Resources\SimpleStudentResource;
 use App\Models\User;
@@ -102,8 +103,8 @@ class Students extends Controller
         // 
     }
 
-    public function destroy($id)
+    public function destroy(DeleteStudentRequest $request, Student $student)
     {
-        // 
+        return $student->delete();
     }
 }
