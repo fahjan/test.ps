@@ -1,11 +1,14 @@
 <?php
 
+use App\Http\Controllers\DetectDeviceController;
 use App\Http\Controllers\ImpersonateController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\Account\Account;
 use App\Http\Controllers\Auth\LoginController;
 
+
+Route::get('/app', DetectDeviceController::class)->middleware();
 
 Route::get('/impersonate/{id}', [ImpersonateController::class, 'impersonate'])->name('login-as')
     ->middleware(['auth', 'role:admin']);

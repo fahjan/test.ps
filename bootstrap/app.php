@@ -25,6 +25,8 @@ return Application::configure(basePath: dirname(__DIR__))
             'localeCookieRedirect' => \Mcamara\LaravelLocalization\Middleware\LocaleCookieRedirect::class,
             'localeViewPath' => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationViewPath::class,
             'arabic_numbers' => \App\Http\Middleware\ArabicNumbers::class,
+            'device_redirect' => \App\Http\Middleware\DeviceRedirect::class,
+
 
         ]);
     })
