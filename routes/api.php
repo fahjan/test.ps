@@ -10,7 +10,7 @@ use App\Http\Controllers\Api\AuthController;
 // })->middleware('auth:sanctum');
 
 
-Route::post('login', [AuthController::class, 'login']);
+Route::post('login', [AuthController::class, 'login'])->middleware(['arabic_numbers']);
 
 Route::middleware(['auth:sanctum', 'arabic_numbers'])->group(function () {
     Route::get('me', function (Request $request) {

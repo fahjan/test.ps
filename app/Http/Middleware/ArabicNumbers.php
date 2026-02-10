@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ArabicNumbers
 {
-    protected $except = ['password_confirmation-', 'password-'];
+    protected $except = ['password_confirmation', 'password'];
     /**
      * Handle an incoming request.
      *
@@ -31,6 +31,7 @@ class ArabicNumbers
         array_walk_recursive($data, function (&$value, $key) {
             $value = $this->processValue($value, $key);
         });
+
         return $data;
     }
 

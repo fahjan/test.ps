@@ -232,6 +232,7 @@ class Student extends Model
             return Question::where('license_id', '<=', $this->license_id)
                 ->where('category', $this->exam_type)->count();
         });
+
         $questions = $questions > 0 ? $questions : 1;
 
 
@@ -239,13 +240,10 @@ class Student extends Model
         $student_exams = Exam::select('id')
             ->from('exams')
             ->where('student_id', $student_id)->get()->pluck('id', 'id')->toArray();
+
         $answers = Answer::select('question_id')->where('is_true', 'true')->whereIn('exam_id', array_values($student_exams))
             ->count(DB::raw('DISTINCT question_id'));
 
-
-
-
-        // if($answers>0) dd(DB::getQueryLog());
-        return ($answers / $questions) * 100;
+        return $answers / $questions;
     }
 }
