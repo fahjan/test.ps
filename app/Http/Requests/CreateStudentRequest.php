@@ -40,6 +40,9 @@ class CreateStudentRequest extends FormRequest
             'trainer_id' => 'required',
             'drivingtrainer_id' => 'required',
             'gender' => 'required',
+            'agreed_lessons' => ['required', 'integer'],
+
+
         ];
     }
 
