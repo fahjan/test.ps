@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Manager;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ManagerCanViewStudentsBySchoolIdRequest;
+use App\Http\Resources\SimpleStudentResource;
 use Illuminate\Http\Request;
 use App\Http\Resources\StudentResource;
 use App\Models\Student;
@@ -28,7 +29,7 @@ class Students extends Controller
             ->with(['user'])
             ->latest()->paginate();
 
-        return StudentResource::collection($students);
+        return SimpleStudentResource::collection($students);
     }
 
     public function create()
