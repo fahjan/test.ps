@@ -22,7 +22,7 @@ class Students extends Controller
             })
 
             ->when($request->search, function ($q, $search) {
-                return $q->whereLike('last_name', '%' . $search . '%');
+                return $q->whereLike('family_name', '%' . $search . '%');
             })
             ->withCount([
                 'lessons',
