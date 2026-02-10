@@ -20,6 +20,10 @@ class Students extends Controller
             ->when($request->active, function ($q, $active) {
                 return $q->where('active', $active);
             })
+
+            ->when($request->search, function ($q, $search) {
+                return $q->whereLike('last_name', '%'.$search.'%);
+            })
             ->withCount([
                 'lessons',
                 'payments as payments_sum' => function ($q) {
