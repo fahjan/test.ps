@@ -132,13 +132,13 @@ class Student extends Model
 
     public function setMedicalCheckedAtAttribute($date)
     {
-        $this->attributes['medical_checked_at'] = $date == null ? null : Carbon::createFromFormat('d/m/Y', $date)->format('Y-m-d');
+        $this->attributes['medical_checked_at'] = $date == null ? null : Carbon::parse($date)->format('Y-m-d');
     }
 
     public function setDateofbirthAttribute($date)
     {
 
-        $this->attributes['dateofbirth'] = $date == null ? null : Carbon::createFromFormat('d/m/Y', $date)->format('Y-m-d');
+        $this->attributes['dateofbirth'] = $date == null ? null : Carbon::parse($date)->format('Y-m-d');
     }
 
     public function getPrevEndDateAttribute($val)
