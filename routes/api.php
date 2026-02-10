@@ -12,7 +12,7 @@ use App\Http\Controllers\Api\AuthController;
 
 Route::post('login', [AuthController::class, 'login']);
 
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware(['auth:sanctum', 'arabic_numbers'])->group(function () {
     Route::get('me', function (Request $request) {
         return $request->user();
     });

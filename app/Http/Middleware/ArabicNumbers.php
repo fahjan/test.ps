@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ArabicNumbers
 {
-    protected $except = ['password_confirmation', 'password'];
+    protected $except = ['password_confirmation-', 'password-'];
     /**
      * Handle an incoming request.
      *
