@@ -13,7 +13,7 @@ class ListTrainersRequest extends FormRequest
     public function authorize(): bool
     {
         $manager_has_role_to_school = Manager::whereHas('school', function ($q) {
-            return $q->wgere('id', request('school_id'));
+            return $q->where('id', request('school_id'));
         })->exists();
 
         return $manager_has_role_to_school;
