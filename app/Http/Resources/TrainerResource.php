@@ -18,7 +18,7 @@ class TrainerResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->user->name,
-            'school' => new SchoolResource($this->school),
+            // 'school' => new SchoolResource($this->school),
         ];
     }
 }
