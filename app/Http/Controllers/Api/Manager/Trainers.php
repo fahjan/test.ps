@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Api\Manager;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ListTrainersRequest;
+use App\Http\Resources\TrainerResource;
+use App\Models\Trainer;
 use Illuminate\Http\Request;
 
 class Trainers extends Controller
@@ -10,8 +13,13 @@ class Trainers extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(ListTrainersRequest $request)
     {
+        $trainers = Trainer::with(['user'])->whereHas('school', function ($q) use ($request) {
+            return $q->where('id', $request->school_id);
+        })->get();
+
+        return TrainerResource::collection($trainers);
 
     }
 
