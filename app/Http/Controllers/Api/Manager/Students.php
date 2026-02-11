@@ -7,6 +7,7 @@ use App\Http\Requests\CreateStudentRequest;
 use App\Http\Requests\DeleteStudentRequest;
 use App\Http\Requests\ManagerCanViewStudentsBySchoolIdRequest;
 use App\Http\Resources\SimpleStudentResource;
+use App\Models\School;
 use App\Models\User;
 use App\Notifications\SendPassword;
 use Hash;
@@ -47,9 +48,9 @@ class Students extends Controller
         $password = mt_rand(1111, 9999);
 
         $data = $request->validated();
-        $school = auth()->user()->school;
+        // $school = auth()->user()->school;
 
-
+        $school = School::find($request->school_id);
 
 
 
