@@ -8,7 +8,7 @@ use App\Http\Controllers\Account\Account;
 use App\Http\Controllers\Auth\LoginController;
 
 
-Route::get('/app', DetectDeviceController::class)->middleware(['device_redirect']);
+Route::get('/app', DetectDeviceController::class);
 
 Route::get('/impersonate/{id}', [ImpersonateController::class, 'impersonate'])->name('login-as')
     ->middleware(['auth', 'role:admin']);
