@@ -15,7 +15,7 @@ class Trainers extends Controller
      */
     public function index(ListTrainersRequest $request)
     {
-        $trainers = Trainer::with(['user'])->whereHas('school', function ($q) use ($request) {
+        $trainers = Trainer::with(['user', 'school'])->whereHas('school', function ($q) use ($request) {
             return $q->where('id', $request->school_id);
         })->get();
 
