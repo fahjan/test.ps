@@ -11,17 +11,17 @@ class StudentGraduateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        // $manager_has_role_to_school = $this->student->where(function ($query) {
-        //     $query->whereIn('school_id', function ($subQuery) {
-        //         $subQuery->select('school_id')
-        //             ->from('managers')
-        //             ->where('user_id', auth()->id());
-        //     });
-        // })->exists();
+        $manager_has_role_to_school = $this->student->where(function ($query) {
+            $query->whereIn('school_id', function ($subQuery) {
+                $subQuery->select('school_id')
+                    ->from('managers')
+                    ->where('user_id', auth()->id());
+            });
+        })->exists();
 
-        // return $manager_has_role_to_school;
+        return $manager_has_role_to_school;
 
-        return true;
+
     }
 
     /**
