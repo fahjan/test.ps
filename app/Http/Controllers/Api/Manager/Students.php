@@ -103,10 +103,9 @@ class Students extends Controller
     public function update(StudentGraduateRequest $request, Student $student)
     {
 
-    return $student;
-        $student->update([
-            "$request->key" => now(),
-        ]);
+
+        $student->{$request->field} = now();
+        $student->save();
 
         return Student::select(['id', 'theoretical_at', 'tested_at'])->where('id', $student->id)->first();
 
