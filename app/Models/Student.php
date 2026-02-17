@@ -70,7 +70,15 @@ class Student extends Model
 
     protected $searchable = ['family_name', 'id_number', 'archive_number', 'license_number'];
 
-    public $dates = ['prev_end_date', 'training_end_at', 'dateofbirth', 'theoretical_at', 'tested_at', 'affiliated_at', 'medical_checked_at'];
+    public $dates = [
+        'prev_end_date',
+        'training_end_at',
+        'dateofbirth',
+        'theoretical_at',
+        'tested_at',
+        'affiliated_at',
+        'medical_checked_at'
+    ];
     // protected $dateFormat = 'Y-m-d';
 
     public function getDateofbirthAttribute($val)

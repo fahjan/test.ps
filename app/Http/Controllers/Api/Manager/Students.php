@@ -104,7 +104,7 @@ class Students extends Controller
     {
 
         return $student->update([
-            $request->key => now(),
+            "$request->key" => now(),
         ]);
 
     }
