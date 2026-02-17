@@ -103,6 +103,7 @@ class Students extends Controller
     public function update(StudentGraduateRequest $request, Student $student)
     {
 
+    return $student;
         $student->update([
             "$request->key" => now(),
         ]);
