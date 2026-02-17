@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateStudentRequest;
 use App\Http\Requests\DeleteStudentRequest;
 use App\Http\Requests\ManagerCanViewStudentsBySchoolIdRequest;
+use App\Http\Requests\StudentGraduateRequest;
 use App\Http\Resources\SimpleStudentResource;
 use App\Models\School;
 use App\Models\User;
@@ -99,9 +100,13 @@ class Students extends Controller
         //
     }
 
-    public function update(Request $request, $id)
+    public function update(StudentGraduateRequest $request, Student $student)
     {
-        // 
+
+        return $student->update([
+            $request->key => now(),
+        ]);
+
     }
 
     public function destroy(DeleteStudentRequest $request, Student $student)
