@@ -17,7 +17,7 @@ class StudentGraduateRequest extends FormRequest
                     ->from('managers')
                     ->where('user_id', auth()->id());
             });
-        });
+        })->exists();
         return $manager_has_role_to_school;
     }
 
