@@ -23,6 +23,14 @@ class AuthController extends Controller
             'password' => $request->password,
         ];
 
+        $user = User::where('mobile', $request->mobile)->first();
+
+        if ($user->device_info != null) {
+            throw ValidationException::withMessages([
+                'message' => [__('Already on anothe device')],
+            ]);
+        }
+
         if (Auth::attempt($credentials)) {
             // Authentication successful...
             auth()->user()->update([
