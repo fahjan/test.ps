@@ -15,6 +15,7 @@ use Illuminate\Validation\ValidationException;
 class AuthController extends Controller
 {
 
+    private $allowedUsers = ['970599522449'];
 
     public function login(LoginRequest $request)
     {
@@ -23,14 +24,16 @@ class AuthController extends Controller
             'password' => $request->password,
         ];
 
+
         $user = User::where('mobile', $request->mobile)->first();
 
-        if ($user->device_info != null) {
-            throw ValidationException::withMessages([
-                'message' => [__('Already on anothe device')],
-            ]);
+        if (!in_array($request->mobile, $this->allowedUsers)) {
+            if ($user->device_info != null && $user->device_info != $request->device_info) {
+                throw ValidationException::withMessages([
+                    'message' => [__('Already on anothe device')],
+                ]);
+            }
         }
-
         if (Auth::attempt($credentials)) {
             // Authentication successful...
             auth()->user()->update([
