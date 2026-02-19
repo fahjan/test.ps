@@ -24,7 +24,7 @@ class Students extends Controller
 
         $schools = School::where('status', 'active')->orderBy('title')->get();
 
-        $students = Student::with(['user:code', 'school', 'creator'])
+        $students = Student::with(['user', 'school', 'creator'])
 
             ->when($request->paid_status, function ($query) use ($request) {
                 $query->where('paid_status', $request->paid_status);
