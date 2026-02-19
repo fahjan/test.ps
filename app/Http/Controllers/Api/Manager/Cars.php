@@ -14,11 +14,24 @@ class Cars extends Controller
     public function index(Request $request)
     {
 
-        $manager = $request->user()->managers()->where('school_id', $request->school_id)->first();
-
-        $cars = $manager->school->cars()->with(['vehicletype'])->simplePaginate();
+        $cars = Car::where('school_id', $request->school_id)
+            ->whereHas('school.managers', function ($q) use ($request) {
+                $q->where('user_id', $request->user()->id);
+            })->simplePaginate();
 
         return $cars;
+
+
+        $cars = $request->user()->managers()->where('school_id', $request->school_id)->with(['school.cars'])->simplePaginate();
+
+        return $cars;
+
+
+        $manager = $request->user()->managers()->where('school_id', $request->school_id)->first();
+
+        $cars = $manager->school()->cars()->with(['vehicletype'])->simplePaginate();
+
+
         $cars = Car::where('school_id', $request->school_id)
 
             ->with(['trainer', 'vehicletype'])
