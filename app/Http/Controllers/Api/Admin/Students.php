@@ -31,7 +31,11 @@ class Students extends Controller
             })
             ->when($request->search, function ($q, $search) {
                 if (is_numeric($search)) {
-                    return $q->whereLike('mobile', '%' . $search . '%');
+
+                    return $q->whereHas('user', function ($q) use ($search) {
+                        $q->whereLike('mobile', '%' . $search . '%');
+                    });
+
                 }
                 return $q->whereLike('family_name', '%' . $search . '%');
             })
