@@ -23,7 +23,7 @@ class Students extends Controller
     {
 
         $students = Student::where('school_id', $request->school_id)
-
+            ->with(['user:code'])
             ->when($request->active, function ($q, $active) {
                 return $q->where('active', $active);
             })

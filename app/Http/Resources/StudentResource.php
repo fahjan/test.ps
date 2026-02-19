@@ -34,6 +34,7 @@ class StudentResource extends JsonResource
             'percent' => $this->percent,
             'mobile' => $this->user->mobile,
             'exams' => ExamResource::collection($this->exams),
+            'code' => $this->user->code,
 
         ];
     }

@@ -30,6 +30,7 @@ class StudentsForAdminResource extends JsonResource
             'school' => new SchoolResource($this->school),
             'percent' => $this->percent,
             'mobile' => $this->user->mobile,
+            'code' => $this->user->code,
 
         ];
     }
