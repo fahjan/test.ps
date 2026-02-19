@@ -38,7 +38,7 @@ class Students extends Controller
                 }
             ])
             ->with(['user'])
-            ->latest()->paginate();
+            ->latest()->simplePaginate();
 
         return SimpleStudentResource::collection($students);
     }
