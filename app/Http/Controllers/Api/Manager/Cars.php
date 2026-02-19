@@ -16,7 +16,7 @@ class Cars extends Controller
 
         $manager = $request->user()->managers()->where('school_id', $request->school_id)->first();
 
-        $cars = $manager->school()->cars()->with(['vehicletype'])->simplePaginate();
+        $cars = $manager->school->cars()->with(['vehicletype'])->simplePaginate();
 
         return $cars;
         $cars = Car::where('school_id', $request->school_id)
