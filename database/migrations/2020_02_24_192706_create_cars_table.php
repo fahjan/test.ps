@@ -35,8 +35,10 @@ class CreateCarsTable extends Migration
             // $table->integer('license_id')->index('license_id');
             $table->year('model_year')->nullable();
             $table->text('notes')->nullable();
-            $table->integer('trainer_id')->index('trainer_id');
+            $table->integer('trainer_id')->index('trainer_id')->nullable();
             $table->integer('vehicletype_id')->nullable()->index('vehicletype_id');
+            $table->enum('status', ['active', 'inactive'])->default('active');
+
         });
     }
 

@@ -50,18 +50,18 @@ class Trainers extends Controller
     {
         $user = [];
 
-        $user['mobile']     = phone($request->mobile, config('services.countries'));
-        $user['id_number']  = $request->id_number;
-        $user['name']       = $request->name;
-        $user['password']   = Hash::make($request->password);
+        $user['mobile'] = phone($request->mobile, config('services.countries'));
+        $user['id_number'] = $request->id_number;
+        $user['name'] = $request->name;
+        $user['password'] = Hash::make($request->password);
 
 
-        DB::transaction(function () {
+        DB::transaction(function () use ($request, $user) {
             $created_user = User::firstOrCreate(['mobile' => $user['mobile']], $user);
-            $created_user->assignRole(['manager']);
-            $photo = $request->hasFile('avatar') ? $request->file('avatar')->store('managers') : $request->photo;
+            // $created_user->assignRole(['manager']);
+            // $photo = $request->hasFile('avatar') ? $request->file('avatar')->store('managers') : $request->photo;
 
-            Trainer::updateOrCreate(['school_id' => $request->school_id, 'user_id' => $created_user->id], ['photo' => $photo]);
+            Trainer::updateOrCreate(['school_id' => $request->school_id, 'user_id' => $created_user->id], );
 
             $created_user->notify(new SendPassword(['message' => 'اسم المستخدم: ' . $request->mobile . '.' . 'كلمة المرور: ' . $request->password]));
             // auth()->user()->notify(new SendPassword(['message' => 'اسم المستخدم' . $request->mobile . '.' . 'كلمة المرور: ' . $request->password]));

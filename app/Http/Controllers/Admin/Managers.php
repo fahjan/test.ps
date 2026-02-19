@@ -65,7 +65,7 @@ class Managers extends Controller
 
 
         $created_user = User::firstOrCreate(['mobile' => $user['mobile']], $user);
-        $created_user->assignRole(['manager']);
+        // $created_user->assignRole(['manager']);
         $photo = $request->hasFile('avatar') ? $request->file('avatar')->store('managers') : $request->photo;
 
         Manager::updateOrCreate(['school_id' => $request->school_id, 'user_id' => $created_user->id], ['photo' => $photo]);
