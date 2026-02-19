@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Manager;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CarResource;
 use App\Models\Car;
 use Illuminate\Http\Request;
 
@@ -15,31 +16,12 @@ class Cars extends Controller
     {
 
         $cars = Car::where('school_id', $request->school_id)
+            ->with(['vehicletype', 'school'])
             ->whereHas('school.managers', function ($q) use ($request) {
                 $q->where('user_id', $request->user()->id);
             })->simplePaginate();
 
-        return $cars;
-
-
-        $cars = $request->user()->managers()->where('school_id', $request->school_id)->with(['school.cars'])->simplePaginate();
-
-        return $cars;
-
-
-        $manager = $request->user()->managers()->where('school_id', $request->school_id)->first();
-
-        $cars = $manager->school()->cars()->with(['vehicletype'])->simplePaginate();
-
-
-        $cars = Car::where('school_id', $request->school_id)
-
-            ->with(['trainer', 'vehicletype'])
-            ->school()
-            ->latest()
-            ->simplePaginate();
-
-        // $cars = Car::where('school_id', $request->school_id)->get();
+        return CarResource::collection($cars);
 
     }
 
