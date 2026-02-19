@@ -14,7 +14,9 @@ class Cars extends Controller
     public function index(Request $request)
     {
 
-        $cars = $request->user()->managers()->where('school_id', $request->school_id)->with(['school.cars'])->simplePaginate();
+        $manager = $request->user()->managers()->where('school_id', $request->school_id)->first();
+
+        $cars = $manager->school()->cars()->simplePaginate();
 
         return $cars;
         $cars = Car::where('school_id', $request->school_id)
