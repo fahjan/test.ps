@@ -14,9 +14,8 @@ Route::post('login', [AuthController::class, 'login'])
     ->middleware(['arabic_numbers']);
 
 Route::middleware(['auth:sanctum', 'arabic_numbers'])->group(function () {
-    Route::get('me', function (Request $request) {
-        return $request->user();
-    });
+    Route::get('me', [AuthController::class, 'me']);
+
 
     Route::prefix('manager')->group(function () { //->middleware(['role:manager'])
 

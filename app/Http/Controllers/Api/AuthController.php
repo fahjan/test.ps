@@ -34,6 +34,7 @@ class AuthController extends Controller
                 ]);
             }
         }
+
         if (Auth::attempt($credentials)) {
             // Authentication successful...
             auth()->user()->update([
@@ -74,5 +75,14 @@ class AuthController extends Controller
     public function update_password(Request $request)
     {
         // 
+    }
+
+    public function me(Request $request)
+    {
+
+        $user = $request->user();
+        $user->load(['roles', 'students.school', 'students.license', 'students.exams.answers', 'managers.school', 'trainers.school']);
+
+        return new UserResource($user);
     }
 }
