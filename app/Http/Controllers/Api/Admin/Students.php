@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SimpleStudentResource;
+use App\Http\Resources\StudentsForAdminResource;
 use App\Models\School;
 use App\Models\Student;
 use Illuminate\Http\Request;
@@ -42,7 +43,7 @@ class Students extends Controller
             })
             ->search()->latest()->simplePaginate();
 
-        return SimpleStudentResource::collection($students);
+        return StudentsForAdminResource::collection($students);
 
 
         // return view($this->route . 'index', compact('objects', 'paid_status', 'use_app', 'schools', 'school_id'));
