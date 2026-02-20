@@ -31,6 +31,7 @@ class Students extends Controller
             ->when($request->search, function ($q, $search) {
                 return $q->whereLike('family_name', '%' . $search . '%');
             })
+
             ->withCount([
                 'lessons',
                 'payments as payments_sum' => function ($q) {
