@@ -20,7 +20,7 @@ class Cars extends Controller
                 ->with(['vehicletype', 'school:id,title'])
                 ->whereHas('school.managers', function ($q) use ($request) {
                     $q->where('user_id', $request->user()->id);
-                })->get();
+                })->latest('id')->get();
 
             return CarResource::collection($cars);
         });
