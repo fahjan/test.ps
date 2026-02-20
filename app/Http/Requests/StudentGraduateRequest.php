@@ -32,7 +32,7 @@ class StudentGraduateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'field' => ['required', 'in:tested_at,theoretical_at'],
+            'field' => ['required', 'in:tested_at,theoretical_at,active'],
         ];
     }
 }
