@@ -34,6 +34,8 @@ class Cars extends Controller
     {
         cache()->forget("school-cars:$request->school_id");
 
+        // TODO(fahjan): validate user role
+
         Car::create($request->all());
 
         return $this->index($request);
@@ -54,7 +56,7 @@ class Cars extends Controller
     {
         cache()->forget("school-cars:$request->school_id");
         //
-
+        // TODO(fahjan): validate user role
         $car->update($request->all());
         return $this->index($request);
 
