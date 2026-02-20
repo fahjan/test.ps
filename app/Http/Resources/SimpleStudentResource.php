@@ -38,6 +38,7 @@ class SimpleStudentResource extends JsonResource
             'trainer_id' => $this->trainer_id,
             'city_id' => $this->city_id,
             'code' => $this->user->code,
+            'active' => $this->active,
             // 'exams' => ExamResource::collection($this->exams),
 
         ];

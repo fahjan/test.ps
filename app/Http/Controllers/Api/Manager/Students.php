@@ -104,7 +104,7 @@ class Students extends Controller
     {
 
 
-        $student->{$request->field} = now();
+        $student->{$request->field} = $request->value;
         $student->save();
 
         return Student::select(['id', 'theoretical_at', 'tested_at'])->where('id', $student->id)->first();
