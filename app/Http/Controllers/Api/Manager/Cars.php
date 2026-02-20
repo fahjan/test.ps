@@ -17,7 +17,7 @@ class Cars extends Controller
 
         return cache()->rememberForever("school-cars:$request->school_id", function () use ($request) {
             $cars = Car::where('school_id', $request->school_id)
-                ->with(['vehicletype', 'school'])
+                ->with(['vehicletype', 'school:id,title'])
                 ->whereHas('school.managers', function ($q) use ($request) {
                     $q->where('user_id', $request->user()->id);
                 })->get();
