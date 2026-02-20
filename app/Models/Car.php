@@ -10,7 +10,7 @@ class Car extends Model
     use \App\Traits\Search;
     use \App\Traits\UserTrait;
 
-    protected $fillable = ['title', 'notes', 'school_id', 'car_number', 'renewal_at', 'insurance_at', 'model_year', 'trainer_id', 'vehicletype_id'];
+    protected $fillable = ['title', 'notes', 'school_id', 'car_number', 'renewal_at', 'insurance_at', 'model_year', 'trainer_id', 'vehicletype_id', 'status'];
 
     // public $serachable = ['', ''];
     protected $searchable = ['title', 'car_number'];

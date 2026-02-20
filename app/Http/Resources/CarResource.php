@@ -22,6 +22,7 @@ class CarResource extends JsonResource
             'insurance_at' => $this->insurance_at,
             'model_year' => $this->model_year,
             'trainer_id' => $this->trainer_id,
+            'status' => $this->status,
             'school' => new SchoolResource($this->school),
             'vehicletype' => new VehicletypeResource($this->vehicletype),
         ];
