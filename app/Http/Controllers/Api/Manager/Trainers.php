@@ -15,20 +15,27 @@ class Trainers extends Controller
      */
     public function index(ListTrainersRequest $request)
     {
-        $trainers = Trainer::with(['user', 'school'])->whereHas('school', function ($q) use ($request) {
-            return $q->where('id', $request->school_id);
-        })->get();
 
-        return TrainerResource::collection($trainers);
+        return cache()->rememberForever("school-trainers:$request->school_id", function () use ($request) {
 
+            $trainers = Trainer::with(['user', 'school'])->whereHas('school', function ($q) use ($request) {
+                return $q->where('id', $request->school_id);
+            })->get();
+
+            return TrainerResource::collection($trainers);
+        });
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ListTrainersRequest $request)
     {
-        //
+        cache()->forget("school-trainers:$request->school_id");
+
+        Trainer::create($request->all());
+
+        return $this->index($request);
     }
 
     /**
@@ -42,9 +49,12 @@ class Trainers extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ListTrainersRequest $request, Trainer $trainer)
     {
-        //
+        cache()->forget("school-trainers:$request->school_id");
+
+        $trainer->update($request->all());
+        return $this->index($request);
     }
 
     /**

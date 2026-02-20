@@ -19,6 +19,7 @@ class TrainerResource extends JsonResource
             'id' => $this->id,
             'name' => $this->user->name,
             'school' => new SchoolResource($this->school),
+            'user' => new SimpleUserResource($this->user),
         ];
     }
 }
