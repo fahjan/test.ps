@@ -5,7 +5,11 @@ namespace App\Http\Controllers\Api\Manager;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ListTrainersRequest;
 use App\Http\Resources\TrainerResource;
+use App\Models\Manager;
 use App\Models\Trainer;
+use App\Models\User;
+use App\Notifications\SendPassword;
+use Hash;
 use Illuminate\Http\Request;
 
 class Trainers extends Controller
@@ -33,7 +37,28 @@ class Trainers extends Controller
     {
         cache()->forget("school-trainers:$request->school_id");
 
-        Trainer::create($request->all());
+        $mobile = phone($request->mobile, config('services.countries'));
+
+        $find_user = User::where('mobile', $mobile)->orWhere('id_number', $request->id_number)->first();
+
+        if ($find_user) {
+            Manager::updateOrCreate(['school_id' => $request->school_id, 'user_id' => $find_user->id]);
+            return $this->index($request);
+        }
+
+        $user['mobile'] = $mobile;
+        $user['id_number'] = $request->id_number;
+        $user['name'] = $request->name;
+        $user['password'] = mt_rand(1111, 9999);
+
+
+        $created_user = User::create($user);
+
+        Manager::updateOrCreate(['school_id' => $request->school_id, 'user_id' => $created_user->id]);
+
+
+        $created_user->notify(new SendPassword(['message' => 'اسم المستخدم: ' . $request->mobile . '.' . 'كلمة المرور: ' . $user['password']]));
+
 
         return $this->index($request);
     }
@@ -53,7 +78,7 @@ class Trainers extends Controller
     {
         cache()->forget("school-trainers:$request->school_id");
 
-        $trainer->update($request->all());
+        $trainer->update(['status' => $request->status]);
         return $this->index($request);
     }
 
