@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CreatePaymentRequest;
 use App\Http\Resources\ExamResource;
 use App\Http\Resources\PaymentResource;
+use App\Http\Services\CacheService;
 use App\Models\Exam;
 use App\Models\Payment;
 use App\Models\Student;
@@ -19,7 +20,10 @@ class PaymentsController extends Controller
     public function index(Student $student)
     {
 
-        return cache()->rememberForever("student-payments:$student->id", function () use ($student) {
+        $page = request()->page ?? 1;
+        return cache()->rememberForever("student-payments:$student->id-page:$page", function () use ($student) {
+            $student->payments()->with('kind')->paginate(10);
+
             $payments = Payment::
                 with(['kind', 'student'])
                 ->where("student_id", $student->id)->latest('id')->simplePaginate(10);
@@ -30,9 +34,10 @@ class PaymentsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Student $student, CreatePaymentRequest $request)
+    public function store(Student $student, CreatePaymentRequest $request, CacheService $cache)
     {
-        cache()->forget("student-payments:$student->id");
+
+        $cache->clearCache("student-payments:$student->id-page:");
 
         $student->payments()->create($request->validated());
 
