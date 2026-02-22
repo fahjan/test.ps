@@ -45,15 +45,17 @@ class Trainers extends Controller
         $user['name'] = $request->name;
         $user['password'] = Hash::make($request->password);
 
+
         $created_user = User::firstOrCreate(['mobile' => $user['mobile']], $user);
+        $created_user->assignRole(['trainer']);
+        $photo = $request->hasFile('avatar') ? $request->file('avatar')->store('trainers') : $request->photo;
 
-        Trainer::updateOrCreate(
+        $trainer = Trainer::updateOrCreate(
             ['school_id' => auth()->user()->school->id, 'user_id' => $created_user->id],
+            ['photo' => $photo]
         );
-
-        if ($created_user->wasRecentlyCreated) {
-            $created_user->notify(new SendPassword(['message' => 'اسم المستخدم: ' . $request->mobile . '.' . 'كلمة المرور: ' . $request->password]));
-        }
+        $trainer->jobs()->sync($request->jobs);
+        $created_user->notify(new SendPassword(['message' => 'اسم المستخدم: ' . $request->mobile . '.' . 'كلمة المرور: ' . $request->password]));
 
         return redirect(route($this->route . 'index'));
     }
