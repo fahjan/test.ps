@@ -42,11 +42,10 @@ class Trainers extends Controller
         $find_user = User::where('mobile', $mobile)->orWhere('id_number', $request->id_number)->first();
 
         if ($find_user) {
-            $manager = Manager::firstOrCreate([
+            Trainer::firstOrCreate([
                 'school_id' => $request->school_id,
                 'user_id' => $find_user->id
             ]);
-            return $manager;
             return $this->index($request);
         }
 
@@ -58,7 +57,7 @@ class Trainers extends Controller
 
         $created_user = User::create($user);
 
-        Manager::updateOrCreate(['school_id' => $request->school_id, 'user_id' => $created_user->id]);
+        Trainer::updateOrCreate(['school_id' => $request->school_id, 'user_id' => $created_user->id]);
 
 
         $created_user->notify(new SendPassword(['message' => 'اسم المستخدم: ' . $request->mobile . '.' . 'كلمة المرور: ' . $user['password']]));
