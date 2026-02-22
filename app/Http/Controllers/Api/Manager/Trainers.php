@@ -41,13 +41,14 @@ class Trainers extends Controller
 
         $find_user = User::where('mobile', $mobile)->orWhere('id_number', $request->id_number)->first();
 
-        // if ($find_user) {
-        Manager::firstOrCreate([
-            'school_id' => $request->school_id,
-            'user_id' => $find_user->id
-        ]);
-        return $this->index($request);
-        // }
+        if ($find_user) {
+            $manager = Manager::firstOrCreate([
+                'school_id' => $request->school_id,
+                'user_id' => $find_user->id
+            ]);
+            return $manager;
+            return $this->index($request);
+        }
 
         $user['mobile'] = $mobile;
         $user['id_number'] = $request->id_number;
