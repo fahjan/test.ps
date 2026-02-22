@@ -40,22 +40,20 @@ class Trainers extends Controller
     {
         $user = [];
 
-        $user['mobile']     = ltrim((string) phone($request->mobile, config('services.countries')), '+');
-        $user['id_number']  = $request->id_number;
-        $user['name']       = $request->name;
-        $user['password']   = Hash::make($request->password);
-
+        $user['mobile'] = ltrim((string) phone($request->mobile, config('services.countries')), '+');
+        $user['id_number'] = $request->id_number;
+        $user['name'] = $request->name;
+        $user['password'] = Hash::make($request->password);
 
         $created_user = User::firstOrCreate(['mobile' => $user['mobile']], $user);
-        $created_user->assignRole(['trainer']);
-        $photo = $request->hasFile('avatar') ? $request->file('avatar')->store('trainers') : $request->photo;
 
-        $trainer = Trainer::updateOrCreate(
+        Trainer::updateOrCreate(
             ['school_id' => auth()->user()->school->id, 'user_id' => $created_user->id],
-            ['photo' => $photo]
         );
-        $trainer->jobs()->sync($request->jobs);
-        $created_user->notify(new SendPassword(['message' => 'اسم المستخدم: ' . $request->mobile . '.' . 'كلمة المرور: ' . $request->password]));
+
+        if ($created_user->wasRecentlyCreated) {
+            $created_user->notify(new SendPassword(['message' => 'اسم المستخدم: ' . $request->mobile . '.' . 'كلمة المرور: ' . $request->password]));
+        }
 
         return redirect(route($this->route . 'index'));
     }
