@@ -47,21 +47,40 @@ class Students extends Controller
     public function store(CreateStudentRequest $request)
     {
 
-        $password = mt_rand(1111, 9999);
-
         $data = $request->validated();
-        // $school = auth()->user()->school;
-
-        $school = School::find($request->school_id);
-
-
 
         $user = [];
 
         $user['mobile'] = ltrim((string) phone($request->mobile, config('services.countries')), '+');
         $user['id_number'] = $request->id_number;
-        $user['code'] = $password;
         $user['name'] = $request->first_name . ' ' . $request->father_name . ' ' . $request->gfather_name . ' ' . $request->family_name;
+
+        // $school = auth()->user()->school;
+
+        $school = School::find($request->school_id);
+
+
+        $first_user = User::
+            where('mobile', $user['mobile'])
+            ->orWhere('id_number', $user['id_number'])->first();
+
+        if ($first_user) {
+            $data['archive_number'] = $request->archive_number ?? $school->id . '-' . (Student::where('school_id', $school->id)->count() + 1);
+
+            Student::create(
+                [
+                    'school_id' => $school->id,
+                    'user_id' => $first_user->id,
+                ] + $data,
+
+            );
+            return;
+        }
+
+
+        $password = mt_rand(1111, 9999);
+
+        $user['code'] = $password;
         $user['password'] = Hash::make($password);
 
 
