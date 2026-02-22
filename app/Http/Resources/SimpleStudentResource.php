@@ -23,6 +23,7 @@ class SimpleStudentResource extends JsonResource
             'name' => $this->first_name . ' ' . $this->father_name . ' ' . $this->gfather_name . ' ' . $this->family_name,
             'license_id' => $this->license_id,
             'license' => $this->license,
+            'id_number' => $this->id_number,
             'glasses' => $this->glasses,
             'theoretical_at' => $this->theoretical_at,
             'tested_at' => $this->tested_at,
