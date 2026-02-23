@@ -12,10 +12,14 @@ class SchoolsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
 
-        $schools = School::with(['city', 'trainers', 'managers', 'cars'])->simplePaginate(10);
+        $schools = School::with(['city', 'trainers', 'managers', 'cars'])
+            ->when($request->search, function ($q, $search) {
+                return $q->whereLike('title', '%' . $search . '%');
+            })
+            ->simplePaginate(10);
 
         return SchoolResource::collection($schools);
     }
