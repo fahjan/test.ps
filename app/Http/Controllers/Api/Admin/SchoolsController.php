@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\SchoolForAdminResource;
 use App\Http\Resources\SchoolResource;
 use App\Models\School;
 use Illuminate\Http\Request;
@@ -21,7 +22,7 @@ class SchoolsController extends Controller
             })
             ->simplePaginate(10);
 
-        return SchoolResource::collection($schools);
+        return SchoolForAdminResource::collection($schools);
     }
 
     /**
