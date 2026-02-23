@@ -30,7 +30,7 @@ class PaymentsController extends Controller
 
             $payments_sum = Payment::where("student_id", $student->id)->sum('amount');
 
-            return PaymentResource::collection($payments)->additional(['count' => $payments_sum]);
+            return PaymentResource::collection($payments)->additional(['sum' => $payments_sum]);
         });
     }
 
