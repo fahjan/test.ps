@@ -11,17 +11,17 @@ trait Search
     {
 
         \View::share('s', request()->s);
-        
+
         $query->where(function ($query) {
             foreach ($this->searchable as $column) {
-                if(request()->has($column)) {
+                if (request()->has($column)) {
                     $query->where($column, 'LIKE', '%' . request($column) . '%');
                 }
             }
             return $query;
         });
         return $query;
-        
+
         // dd(request('s'));
         \View::share('s', request('s'));
         /* $query->when(request('s'), function ($query) use ($belongsTo_models) {

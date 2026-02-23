@@ -45,8 +45,8 @@ class Students extends Controller
             ->when($request->school_id, function ($query) use ($request) {
                 $query->where('school_id', $request->school_id);
             })
-            ->search()->latest()->simplePaginate();
-
+            ->latest()->simplePaginate()->withQueryString();
+        // ->search() can use search scope in student model to search in related models like school and user
         return StudentsForAdminResource::collection($students);
 
 
@@ -74,7 +74,12 @@ class Students extends Controller
      */
     public function update(Request $request, Student $student)
     {
-        $student->user()->update(['device_info', null]);
+        if ($request->field == 'device_info') {
+            $student->user()->update(['device_info', null]);
+        }
+        if ($request->field == 'paid_status') {
+            $student->update(['paid_status' => $request->value]);
+        }
     }
 
     /**
