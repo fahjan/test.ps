@@ -39,7 +39,6 @@ class LessonsController extends Controller
     public function store(Student $student, CreateLessonRequest $request, CacheService $cache)
     {
 
-        return ($request->all());
         $cache->clearCache("student-lessons:$student->id-page:");
 
         $student->lessons()->create($request->validated());
