@@ -30,8 +30,7 @@ class LessonsController extends Controller
                 with(['car', 'student', 'trainer'])
                 ->where("student_id", $student->id)->latest('created_at')->simplePaginate();
 
-            $lessons_count = Lesson::where("student_id", $student->id)->count();
-            return LessonResource::collection($lessons)->additional(['count' => $lessons_count]);
+            return LessonResource::collection($lessons);
         });
     }
 
