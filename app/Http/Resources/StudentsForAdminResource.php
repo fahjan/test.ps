@@ -31,6 +31,7 @@ class StudentsForAdminResource extends JsonResource
             'percent' => $this->percent,
             'mobile' => $this->user->mobile,
             'code' => $this->user->code,
+            'paid_status' => $this->paid_status,
 
         ];
     }
