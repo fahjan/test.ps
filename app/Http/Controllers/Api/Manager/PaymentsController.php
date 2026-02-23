@@ -22,12 +22,12 @@ class PaymentsController extends Controller
 
         $page = request()->page ?? 1;
         return cache()->rememberForever("student-payments:$student->id-page:$page", function () use ($student) {
-            $student->payments()->with('kind')->paginate(10);
+            return $student->payments()->with('kind')->latest()->paginate(10);
 
-            $payments = Payment::
-                with(['kind', 'student'])
-                ->where("student_id", $student->id)->latest('id')->simplePaginate(10);
-            return PaymentResource::collection($payments);
+            // $payments = Payment::
+            //     with(['kind', 'student'])
+            //     ->where("student_id", $student->id)->latest('id')->simplePaginate(10);
+            // return PaymentResource::collection($payments);
         });
     }
 
