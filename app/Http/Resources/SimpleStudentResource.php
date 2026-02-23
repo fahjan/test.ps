@@ -29,6 +29,7 @@ class SimpleStudentResource extends JsonResource
             'tested_at' => $this->tested_at,
             'gender' => $this->gender,
             'agreed_amount' => (double) $this->agreed_amount,
+            'agreed_lessons' => (double) $this->agreed_lessons,
             'lessons_count' => (int) $this->lessons_count,
             'payments_sum' => (double) $this->payments_sum,
             // 'school' => new SchoolResource($this->school),
