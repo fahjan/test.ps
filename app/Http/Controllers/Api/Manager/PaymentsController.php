@@ -27,7 +27,10 @@ class PaymentsController extends Controller
             $payments = Payment::
                 with(['kind', 'student'])
                 ->where("student_id", $student->id)->latest('created_at')->simplePaginate();
-            return PaymentResource::collection($payments);
+
+            $payments_sum = Payment::where("student_id", $student->id)->sum('amount');
+
+            return PaymentResource::collection($payments)->additional(['count' => $payments_sum]);
         });
     }
 
