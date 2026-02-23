@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateLessonRequest;
 use App\Http\Requests\CreatePaymentRequest;
 use App\Http\Resources\ExamResource;
+use App\Http\Resources\LessonResource;
 use App\Http\Resources\PaymentResource;
 use App\Http\Services\CacheService;
 use App\Models\Exam;
@@ -28,7 +29,7 @@ class LessonsController extends Controller
             $lessons = Lesson::
                 with(['car', 'student', 'trainer'])
                 ->where("student_id", $student->id)->latest('created_at')->simplePaginate();
-            return PaymentResource::collection($lessons);
+            return LessonResource::collection($lessons);
         });
     }
 
@@ -38,6 +39,7 @@ class LessonsController extends Controller
     public function store(Student $student, CreateLessonRequest $request, CacheService $cache)
     {
 
+        return ($request->all());
         $cache->clearCache("student-lessons:$student->id-page:");
 
         $student->lessons()->create($request->validated());
