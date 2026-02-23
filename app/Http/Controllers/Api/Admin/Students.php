@@ -75,7 +75,7 @@ class Students extends Controller
     public function update(Request $request, Student $student)
     {
         if ($request->field == 'device_info') {
-            $student->user()->update(['device_info', null]);
+            $student->user()->update(['device_info' => null]);
         }
         if ($request->field == 'paid_status') {
             Student::where('id', $student->id)->update(['paid_status' => $request->value]);
