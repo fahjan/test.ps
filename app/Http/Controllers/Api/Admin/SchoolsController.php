@@ -15,7 +15,7 @@ class SchoolsController extends Controller
     public function index(Request $request)
     {
 
-        $schools = School::with(['city', 'trainers', 'managers', 'cars'])
+        $schools = School::with(['city', 'trainers.user', 'managers.user', 'cars'])
             ->when($request->search, function ($q, $search) {
                 return $q->whereLike('title', '%' . $search . '%');
             })
