@@ -22,7 +22,7 @@ class PaymentsController extends Controller
 
         $page = request()->page ?? 1;
         return cache()->rememberForever("student-payments:$student->id-page:$page", function () use ($student) {
-            return $student->payments()->with('kind')->latest()->paginate(10);
+            return $student->payments()->with('kind')->latest('created_at')->paginate(10);
 
             // $payments = Payment::
             //     with(['kind', 'student'])
