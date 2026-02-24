@@ -33,6 +33,14 @@ Route::middleware(['auth:sanctum', 'arabic_numbers'])->group(function () {
         ]);
     });
 
+    Route::prefix('trainer')->group(function () { //
+        Route::apiResources([
+            'students' => App\Http\Controllers\Api\Trainer\StudentsController::class,
+
+        ]);
+    });
+
+
     Route::prefix('admin')->middleware(['role:admin'])->group(function () { //
 
         Route::apiResources([
@@ -49,9 +57,6 @@ Route::middleware(['auth:sanctum', 'arabic_numbers'])->group(function () {
 
     Route::prefix('students')->group(function () {//->middleware(['role:student'])
         Route::resource('exams', App\Http\Controllers\Api\Student\ExamsController::class)->only('store', 'index');
-        //     Route::resources([
-        //         'students' => App\Http\Controllers\Api\Manager\Students::class,
-        // ]);
 
 
 
