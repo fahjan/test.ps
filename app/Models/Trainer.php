@@ -9,7 +9,9 @@ class Trainer extends Model
     use \App\Traits\Search;
     use \App\Traits\UserTrait;
 
-    protected $fillable = ['user_id', 'school_id', 'photo', 'status'];
+    protected $fillable = ['user_id', 'school_id', 'photo', 'status', 'trainer_type'];
+    // trainer_type ENUM: theory, practical, theory and practical
+
     protected $searchable = ['user_id'];
 
     public function user()

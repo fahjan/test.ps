@@ -44,7 +44,8 @@ class Trainers extends Controller
         if ($find_user) {
             Trainer::firstOrCreate([
                 'school_id' => $request->school_id,
-                'user_id' => $find_user->id
+                'user_id' => $find_user->id,
+                'trainer_type' => $request->trainer_type,
             ]);
             return $this->index($request);
         }
@@ -57,7 +58,7 @@ class Trainers extends Controller
 
         $created_user = User::create($user);
 
-        Trainer::updateOrCreate(['school_id' => $request->school_id, 'user_id' => $created_user->id]);
+        Trainer::updateOrCreate(['school_id' => $request->school_id, 'user_id' => $created_user->id], ['trainer_type' => $request->trainer_type]);
 
 
         $created_user->notify(new SendPassword(['message' => 'اسم المستخدم: ' . $request->mobile . '.' . 'كلمة المرور: ' . $user['password']]));
@@ -81,7 +82,7 @@ class Trainers extends Controller
     {
         cache()->forget("school-trainers:$request->school_id");
 
-        $trainer->update(['status' => $request->status]);
+        $trainer->update(['status' => $request->status, 'trainer_type' => $request->trainer_type]);
         return $this->index($request);
     }
 

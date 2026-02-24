@@ -18,6 +18,7 @@ class TrainerSimpleResource extends JsonResource
             'id' => $this->id,
             'name' => $this->user->name,
             'status' => $this->status,
+            'trainer_type' => $this->trainer_type,
             'user' => new SimpleUserResource($this->user),
         ];
     }
