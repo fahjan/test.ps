@@ -34,8 +34,8 @@ class StudentsForAdminResource extends JsonResource
             'code' => $this->user->code,
             'paid_status' => $this->paid_status,
             'city_id' => $this->city->id,
-            'theoryTrainer' => new TrainerSimpleResource($this->user->trainer),
-            'practicalTrainer' => new TrainerSimpleResource($this->user->trainer),
+            'theory_trainer' => new TrainerSimpleResource($this->user->trainer),
+            'practical_trainer' => new TrainerSimpleResource($this->user->trainer),
 
 
         ];
