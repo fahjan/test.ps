@@ -21,6 +21,7 @@ class StudentsForAdminResource extends JsonResource
             'license_id' => $this->license_id,
             'license' => $this->license,
             'glasses' => $this->glasses,
+            'dateofbirth' => $this->dateofbirth,
             'theoretical_at' => $this->theoretical_at,
             'tested_at' => $this->tested_at,
             'gender' => $this->gender,
@@ -32,6 +33,10 @@ class StudentsForAdminResource extends JsonResource
             'mobile' => $this->user->mobile,
             'code' => $this->user->code,
             'paid_status' => $this->paid_status,
+            'city_id' => $this->city->id,
+            'theoryTrainer' => new TrainerSimpleResource($this->user->trainer),
+            'practicalTrainer' => new TrainerSimpleResource($this->user->trainer),
+
 
         ];
     }
