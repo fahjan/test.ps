@@ -38,7 +38,7 @@ class Students extends Controller
                     return $q->select(DB::raw('SUM(amount) as payments_sum'));
                 }
             ])
-            ->with(['user'])
+            ->with(['user', 'city'])
             ->latest()->simplePaginate();
 
         return SimpleStudentResource::collection($students);

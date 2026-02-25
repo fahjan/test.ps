@@ -25,6 +25,7 @@ class SimpleStudentResource extends JsonResource
             'license' => $this->license,
             'id_number' => $this->id_number,
             'glasses' => $this->glasses,
+            'dateofbirth' => $this->dateofbirth,
             'theoretical_at' => $this->theoretical_at,
             'tested_at' => $this->tested_at,
             'gender' => $this->gender,
@@ -38,9 +39,11 @@ class SimpleStudentResource extends JsonResource
             'dateofbirth' => $this->dateofbirth,
             'drivingtrainer_id' => $this->drivingtrainer_id,
             'trainer_id' => $this->trainer_id,
-            'city_id' => $this->city_id,
             'code' => $this->user->code,
             'active' => $this->active,
+            'city_id' => $this->city->id,
+            'theoryTrainer' => new TrainerSimpleResource($this->user->trainer),
+            'practicalTrainer' => new TrainerSimpleResource($this->user->trainer),
             // 'exams' => ExamResource::collection($this->exams),
 
         ];
