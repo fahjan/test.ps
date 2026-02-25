@@ -81,11 +81,11 @@ class Student extends Model
     ];
     // protected $dateFormat = 'Y-m-d';
 
-    public function getDateofbirthAttribute($val)
-    {
+    // public function getDateofbirthAttribute($val)
+    // {
 
-        return $val == null ? null : Carbon::parse($val)->format("d/m/Y");
-    }
+    //     return $val == null ? null : Carbon::parse($val)->format("d/m/Y");
+    // }
 
     public function getFullNameAttribute()
     {
