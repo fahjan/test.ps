@@ -16,7 +16,7 @@ class StudentsController extends Controller
     {
 
         $students = Student::where("school_id", $request->school_id)
-            ->where('trainer_id', $request->trainer_id)
+            ->where('trainer_id', $request->user()->id)
             ->simplePaginate();
         return StudentResource::collection($students);
     }
