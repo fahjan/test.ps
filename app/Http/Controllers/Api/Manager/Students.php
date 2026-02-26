@@ -128,7 +128,7 @@ class Students extends Controller
 
         $student->save();
 
-        return Student::select(['id', 'theoretical_at', 'tested_at'])->where('id', $student->id)->first();
+        return Student::where('id', $student->id)->first();
 
     }
 
