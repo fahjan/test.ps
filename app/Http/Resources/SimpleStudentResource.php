@@ -36,14 +36,13 @@ class SimpleStudentResource extends JsonResource
             // 'school' => new SchoolResource($this->school),
             'percent' => $this->percent,
             'mobile' => $this->user->mobile,
-            'dateofbirth' => $this->dateofbirth,
             'drivingtrainer_id' => $this->drivingtrainer_id,
             'trainer_id' => $this->trainer_id,
             'code' => $this->user->code,
             'active' => $this->active,
             'city_id' => $this->city->id,
-            'theoryTrainer' => new TrainerSimpleResource($this->user->trainer),
-            'practicalTrainer' => new TrainerSimpleResource($this->user->trainer),
+            'theory_trainer' => new TrainerSimpleResource($this->user->trainer),
+            'practical_trainer' => new TrainerSimpleResource($this->user->trainer),
             // 'exams' => ExamResource::collection($this->exams),
 
         ];

@@ -37,8 +37,8 @@ class StudentResource extends JsonResource
             'exams' => ExamResource::collection($this->exams),
             'code' => $this->user->code,
             'city_id' => $this->city->id,
-            'theoryTrainer' => new TrainerSimpleResource($this->user->trainer),
-            'practicalTrainer' => new TrainerSimpleResource($this->user->trainer),
+            'theory_trainer' => new TrainerSimpleResource($this->user->trainer),
+            'practical_trainer' => new TrainerSimpleResource($this->user->trainer),
 
         ];
     }
