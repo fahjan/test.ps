@@ -49,7 +49,7 @@ class PaymentsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Student $student, Exam $id)
+    public function show(Student $student, Payment $id)
     {
         //
     }
@@ -57,7 +57,7 @@ class PaymentsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Exam $exam)
+    public function update(Request $request, Payment $exam)
     {
         //
     }
@@ -65,7 +65,7 @@ class PaymentsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Exam $exam)
+    public function destroy(Payment $exam)
     {
         //
     }
