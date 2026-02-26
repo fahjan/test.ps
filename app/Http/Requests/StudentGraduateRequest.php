@@ -32,7 +32,10 @@ class StudentGraduateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'field' => ['required', 'in:tested_at,theoretical_at,active'],
+            'field' => [
+                'required',
+                'in:tested_at,theoretical_at,active,trainer_id,drivingtrainer_id,license_id,exam_type'
+            ],
         ];
     }
 }
