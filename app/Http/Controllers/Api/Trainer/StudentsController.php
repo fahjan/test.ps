@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Trainer;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\StudentResource;
+use App\Http\Resources\StudentResourceWithoutExams;
 use App\Models\Student;
 use Illuminate\Http\Request;
 
@@ -21,7 +22,7 @@ class StudentsController extends Controller
                     ->orWhere('drivingtrainer_id', $request->trainer_id);
             })
             ->simplePaginate();
-        return StudentResource::collection($students);
+        return StudentResourceWithoutExams::collection($students);
     }
 
     /**
