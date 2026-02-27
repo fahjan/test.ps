@@ -32,10 +32,12 @@ class StudentsForAdminResource extends JsonResource
             'percent' => $this->percent,
             'mobile' => $this->user->mobile,
             'code' => $this->user->code,
+            'device_info' => $this->user->device_info,
             'paid_status' => $this->paid_status,
             'city_id' => $this->city->id,
-            'theory_trainer' => new TrainerSimpleResource($this->user->trainer),
-            'practical_trainer' => new TrainerSimpleResource($this->user->trainer),
+            'theory_trainer' => new TrainerSimpleResource($this->trainer),
+            'practical_trainer' => new TrainerSimpleResource($this->trainer),
+            'user' => new UserSimpleResource($this->user),
 
 
         ];
