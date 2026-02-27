@@ -29,6 +29,7 @@ class UserResource extends JsonResource
             'roles' => RoleResource::collection($this->roles),
             'managers' => ManagerResource::collection($this->managers),
             'trainers' => TrainerResource::collection($this->trainers),
+            'device_info' => $this->device_info,
         ];
     }
 }
