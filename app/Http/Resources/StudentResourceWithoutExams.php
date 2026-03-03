@@ -28,6 +28,7 @@ class StudentResourceWithoutExams extends JsonResource
             'agreed_amount' => $this->agreed_amount,
             'lessons_count' => $this->lessons_count,
             'payments_sum' => $this->payments_sum,
+            'is_disabled' => $this->is_disabled,
             'school' => new SchoolResource($this->school),
             'percent' => $this->percent,
             'mobile' => $this->user->mobile,

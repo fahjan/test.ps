@@ -26,6 +26,7 @@ class StudentsForAdminResource extends JsonResource
             'theoretical_at' => $this->theoretical_at,
             'tested_at' => $this->tested_at,
             'gender' => $this->gender,
+            'is_disabled' => $this->is_disabled,
             'agreed_amount' => $this->agreed_amount,
             'lessons_count' => $this->lessons_count,
             'payments_sum' => $this->payments_sum,

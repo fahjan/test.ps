@@ -38,6 +38,7 @@ class SimpleStudentResource extends JsonResource
             'mobile' => $this->user->mobile,
             'drivingtrainer_id' => $this->drivingtrainer_id,
             'trainer_id' => $this->trainer_id,
+            'is_disabled' => $this->is_disabled,
             'code' => $this->user->code,
             'active' => $this->active,
             'city_id' => $this->city->id,

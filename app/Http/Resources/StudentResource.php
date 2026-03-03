@@ -39,6 +39,7 @@ class StudentResource extends JsonResource
             'city_id' => $this->city->id,
             'theory_trainer' => new TrainerSimpleResource($this->user->trainer),
             'practical_trainer' => new TrainerSimpleResource($this->user->trainer),
+            'is_disabled' => $this->is_disabled,
 
         ];
     }
