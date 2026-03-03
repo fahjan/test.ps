@@ -65,7 +65,8 @@ class Student extends Model
         'status',
         'agreed_lessons',
         'active',
-        'use_app'
+        'use_app',
+        'is_disabled',
     ];
 
     protected $searchable = ['family_name', 'id_number', 'archive_number', 'license_number'];
@@ -77,8 +78,13 @@ class Student extends Model
         'theoretical_at',
         'tested_at',
         'affiliated_at',
-        'medical_checked_at'
+        'medical_checked_at',
     ];
+
+    protected $casts = [
+        'is_disabled' => 'boolean',
+    ];
+
     // protected $dateFormat = 'Y-m-d';
 
     // public function getDateofbirthAttribute($val)

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StudentGraduateRequest extends FormRequest
 {
@@ -34,7 +35,16 @@ class StudentGraduateRequest extends FormRequest
         return [
             'field' => [
                 'required',
-                'in:tested_at,theoretical_at,active,trainer_id,drivingtrainer_id,license_id,exam_type'
+                Rule::in([
+                    'tested_at',
+                    'theoretical_at',
+                    'active',
+                    'trainer_id',
+                    'drivingtrainer_id',
+                    'license_id',
+                    'exam_type',
+                    'is_disabled',
+                ]),
             ],
         ];
     }
