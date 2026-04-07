@@ -10,8 +10,9 @@ class DetectDeviceController extends Controller
     public function __invoke(Request $request)
     {
 
-        $app_store = 'https://testflight.apple.com/join/Cf4eUbrY';
-        $google_play = 'https://play.google.com/store/apps/details?id=app.test.ps';
+        $app_store = 'https://apps.apple.com/us/app/test-ps-driving-school-gaza/id6758583111';
+        // $google_play = 'https://play.google.com/store/apps/details?id=app.test.ps';
+        $google_play = 'https://test.ps/app/app.apk';
 
         $agent = new Agent();
 
