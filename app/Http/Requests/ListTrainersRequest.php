@@ -15,7 +15,7 @@ class ListTrainersRequest extends FormRequest
     {
         // list trainers for manager and trainers 
 
-        // check if the current user is manager of the school, if not return false
+        /* // check if the current user is manager of the school, if not return false
         $manager_has_role_to_school = Manager::whereHas('user', function ($q) {
             $q->where('id', auth()->id());
         })->whereHas('school', function ($q) {
@@ -30,8 +30,9 @@ class ListTrainersRequest extends FormRequest
         })->whereHas('school', function ($q) {
             return $q->where('id', request('school_id'));
         })->exists();
-
-        return $manager_has_role_to_school || $trainer_has_role_to_school;
+        // return $manager_has_role_to_school || $trainer_has_role_to_school;
+ */
+        return true;
     }
 
     /**
