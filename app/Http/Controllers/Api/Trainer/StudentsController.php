@@ -18,7 +18,7 @@ class StudentsController extends Controller
 
         $students = Student::where("school_id", $request->school_id)
             ->where(function ($query) use ($request) {
-                $query->where('trainer_id', $request->trainer)
+                $query->where('trainer_id', $request->trainer_id)
                     ->orWhere('drivingtrainer_id', $request->trainer_id);
             })
             ->simplePaginate();
