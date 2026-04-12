@@ -55,6 +55,7 @@ class CreateStudentRequest extends FormRequest
         $this->merge([
             'mobile' => phone((string) $this->input('mobile'), config('services.countries')),
             'agreed_lessons' => $this->input('agreed_lessons', 12),
+            'active' => $this->input('active', 'yes'),
         ]);
 
         return parent::getValidatorInstance();
