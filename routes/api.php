@@ -19,6 +19,8 @@ Route::middleware(['auth:sanctum', 'arabic_numbers'])->group(function () {
 
     Route::prefix('manager')->group(function () { //->middleware(['role:manager'])
 
+        Route::post('students/{student}/reset', [App\Http\Controllers\Api\Manager\Students::class, 'reset'])->name('students.reset');
+
         Route::apiResources([
             'students' => App\Http\Controllers\Api\Manager\Students::class,
             'students.exams' => App\Http\Controllers\Api\Manager\ExamsController::class,
@@ -42,6 +44,7 @@ Route::middleware(['auth:sanctum', 'arabic_numbers'])->group(function () {
 
 
     Route::prefix('admin')->middleware(['role:admin'])->group(function () { //
+        Route::post('students/{student}/reset', [App\Http\Controllers\Api\Manager\Students::class, 'reset'])->name('students.reset');
 
         Route::apiResources([
             'students' => App\Http\Controllers\Api\Admin\Students::class,

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SimpleStudentResource;
 use App\Http\Resources\StudentsForAdminResource;
+use App\Models\Answer;
 use App\Models\School;
 use App\Models\Student;
 use Illuminate\Http\Request;
@@ -90,5 +91,21 @@ class Students extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function reset(Student $student)
+    {
+        // $student->exams->each->delete();
+        // $student->exams()->delete();
+
+        $examIds = $student->exams()->pluck('id');
+
+        // 2. Delete all answers belonging to those exams
+        Answer::whereIn('exam_id', $examIds)->delete();
+
+        // 3. Delete the exams
+        $student->exams()->delete();
+
+        $student->user()->update(['device_info' => null]);
     }
 }
