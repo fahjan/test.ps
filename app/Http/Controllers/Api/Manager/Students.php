@@ -124,13 +124,17 @@ class Students extends Controller
     public function update(StudentGraduateRequest $request, Student $student)
     {
 
+        if ($request->field == 'exam_type' || $request->field == 'license_id') {
+            $this->reset($student);
+        }
 
         $student->{$request->field} = $request->value;
 
         $student->save();
 
-        return Student::where('id', $student->id)->first();
 
+
+        return Student::where('id', $student->id)->first();
     }
 
     public function destroy(DeleteStudentRequest $request, Student $student)
@@ -138,17 +142,13 @@ class Students extends Controller
         return $student->delete();
     }
 
-    public function reset(Student $student)
+    private function reset(Student $student)
     {
-        // $student->exams->each->delete();
-        // $student->exams()->delete();
 
         $examIds = $student->exams()->pluck('id');
 
-        // 2. Delete all answers belonging to those exams
         Answer::whereIn('exam_id', $examIds)->delete();
 
-        // 3. Delete the exams
         $student->exams()->delete();
 
         $student->user()->update(['device_info' => null]);
