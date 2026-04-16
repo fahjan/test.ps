@@ -26,6 +26,7 @@ class StudentResourceWithoutExams extends JsonResource
             'tested_at' => $this->tested_at,
             'gender' => $this->gender,
             'agreed_amount' => $this->agreed_amount,
+            'paid_status' => $this->paid_status,
             'lessons_count' => $this->lessons_count,
             'payments_sum' => $this->payments_sum,
             'is_disabled' => $this->is_disabled,

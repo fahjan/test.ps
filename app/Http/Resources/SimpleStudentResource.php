@@ -35,6 +35,7 @@ class SimpleStudentResource extends JsonResource
             'payments_sum' => (double) $this->payments_sum,
             // 'school' => new SchoolResource($this->school),
             'percent' => $this->percent,
+            'paid_status' => $this->paid_status,
             'mobile' => $this->user->mobile,
             'drivingtrainer_id' => $this->drivingtrainer_id,
             'trainer_id' => $this->trainer_id,
