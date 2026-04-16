@@ -8,6 +8,7 @@ use App\Http\Requests\DeleteStudentRequest;
 use App\Http\Requests\ManagerCanViewStudentsBySchoolIdRequest;
 use App\Http\Requests\StudentGraduateRequest;
 use App\Http\Resources\SimpleStudentResource;
+use App\Models\Answer;
 use App\Models\School;
 use App\Models\User;
 use App\Notifications\SendPassword;
