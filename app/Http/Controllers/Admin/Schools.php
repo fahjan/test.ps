@@ -32,13 +32,13 @@ class Schools extends Controller
     {
         $countries = Country::all();
         $cities = City::all();
-        return view($this->route . 'create', compact('countries', 'cities'));
+        return view('admin.schools.create', compact('countries', 'cities'));
     }
 
     public function store(Request $request)
     {
         School::create($request->all());
-        flash(__('public.added_successfuly'));
+        // flash(__('public.added_successfuly'));
 
         return redirect($this->route, 'index');
     }

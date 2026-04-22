@@ -62,8 +62,9 @@ class SchoolsController extends Controller
         //
     }
 
-    public function paid(School $school)
+    public function paid($id)
     {
+        $school = School::findOrFail($id);
         $school->students()->where('paid_status', 'new')->update([
             'paid_status' => 'paid'
         ]);
