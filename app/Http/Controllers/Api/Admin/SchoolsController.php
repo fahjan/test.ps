@@ -17,6 +17,11 @@ class SchoolsController extends Controller
     {
 
         $schools = School::with(['city', 'trainers.user', 'managers.user', 'cars'])
+            ->withCount([
+                'students' => function ($q) {
+                    return $q->where('paid_status', 'new');
+                }
+            ])
             ->when($request->search, function ($q, $search) {
                 return $q->whereLike('title', '%' . $search . '%');
             })

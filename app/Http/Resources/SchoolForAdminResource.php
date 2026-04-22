@@ -19,7 +19,7 @@ class SchoolForAdminResource extends JsonResource
             'title' => $this->title,
             'address' => $this->address,
             'city' => $this->city,
-            'new_students_count' => $this->new_students_count,
+            'new_students_count' => $this->students_count,
             'cars' => CarResource::collection($this->cars),
             'trainers' => TrainerSimpleResource::collection($this->trainers),
             'managers' => ManagerWithoutSchool::collection($this->managers),

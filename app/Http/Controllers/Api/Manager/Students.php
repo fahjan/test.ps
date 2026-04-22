@@ -132,8 +132,6 @@ class Students extends Controller
 
         $student->save();
 
-
-
         return Student::where('id', $student->id)->first();
     }
 
