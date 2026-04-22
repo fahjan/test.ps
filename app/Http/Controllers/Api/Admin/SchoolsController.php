@@ -61,4 +61,11 @@ class SchoolsController extends Controller
     {
         //
     }
+
+    public function paid(School $school)
+    {
+        $school->students()->where('paid_status', 'new')->update([
+            'paid_status' => 'paid'
+        ]);
+    }
 }
