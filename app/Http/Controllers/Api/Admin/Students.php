@@ -105,7 +105,7 @@ class Students extends Controller
         $student->user()->update(['device_info' => null]);
     }
 
-    public function password_password(Student $student)
+    public function password_reset(Student $student)
     {
 
 
