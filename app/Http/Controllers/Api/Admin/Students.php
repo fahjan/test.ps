@@ -8,6 +8,7 @@ use App\Http\Resources\StudentsForAdminResource;
 use App\Models\Answer;
 use App\Models\School;
 use App\Models\Student;
+use Hash;
 use Illuminate\Http\Request;
 
 class Students extends Controller
@@ -102,5 +103,18 @@ class Students extends Controller
         $student->exams()->delete();
 
         $student->user()->update(['device_info' => null]);
+    }
+
+    public function password(Student $student)
+    {
+
+
+        $user = $student->user;
+        $code = ($student->user->code == null || $student->user->code == '') ? mt_rand(1111, 9999) : $student->user->code;
+        $user->password = Hash::make($code);
+        $user->code = $code;
+        // $user->notify(new \App\Notifications\SendPassword(['message' => 'كلمة المرور الجديدة: ' . $code]));
+        $user->save();
+
     }
 }

@@ -55,7 +55,7 @@ class Managers extends Controller
         $user['id_number'] = $request->id_number;
         $user['name'] = $request->name;
 
-        if ($request->has('password')) {
+        if ($request->has('password') && $request->password != null && $request->password != '') {
             $password = $request->password;
         } else {
             $password = mt_rand(1111, 9999);
