@@ -105,7 +105,7 @@ class Students extends Controller
         $student->user()->update(['device_info' => null]);
     }
 
-    public function password(Student $student)
+    public function password_password(Student $student)
     {
 
 
@@ -113,8 +113,7 @@ class Students extends Controller
         $code = ($student->user->code == null || $student->user->code == '') ? mt_rand(1111, 9999) : $student->user->code;
         $user->password = Hash::make($code);
         $user->code = $code;
-        // $user->notify(new \App\Notifications\SendPassword(['message' => 'كلمة المرور الجديدة: ' . $code]));
-        $user->save();
 
+        $user->save();
     }
 }
