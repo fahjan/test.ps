@@ -25,6 +25,7 @@ Route::middleware(['auth:sanctum', 'arabic_numbers'])->group(function () {
             'students.payments' => App\Http\Controllers\Api\Manager\PaymentsController::class,
             'students.lessons' => App\Http\Controllers\Api\Manager\LessonsController::class,
             'trainers' => App\Http\Controllers\Api\Manager\Trainers::class,
+            'managers' => App\Http\Controllers\Api\Manager\ManagersController::class,
             'cars' => App\Http\Controllers\Api\Manager\Cars::class,
             // 'school' => App\Http\Controllers\Manager\School::class,
             // 'payments' => App\Http\Controllers\Manager\Payments::class,

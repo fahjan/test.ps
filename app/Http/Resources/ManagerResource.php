@@ -17,6 +17,9 @@ class ManagerResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'can_edit' => $this->can_edit,
+            'can_delete' => $this->can_delete,
+            'status' => $this->status,
             'user' => new SimpleUserResource($this->user),
             'school' => new SchoolResource($this->school),
         ];

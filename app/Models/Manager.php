@@ -9,7 +9,7 @@ class Manager extends Model
     use \App\Traits\Search;
     use \App\Traits\UserTrait;
 
-    protected $fillable = ['school_id', 'user_id', 'photo', 'status']; //'crerator_id', 'updator_id', 
+    protected $fillable = ['school_id', 'user_id', 'photo', 'status', 'can_edit', 'can_delete'];
     protected $searchable = ['status'];
 
     public function school()
