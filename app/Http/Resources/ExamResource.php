@@ -23,7 +23,8 @@ class ExamResource extends JsonResource
             'student_id' => $this->student_id,
             'grade' => $this->grade,
             'questions_count' => $this->questions_count,
-            'answers' => AnswerWithoutQuestionResource::collection($this->answers),
+            'answers' => AnswerResource::collection($this->answers),
+
         ];
     }
 }

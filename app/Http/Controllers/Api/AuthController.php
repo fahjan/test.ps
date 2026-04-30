@@ -95,6 +95,8 @@ class AuthController extends Controller
         $user = $request->user();
         $user->load(['roles', 'students.school', 'students.license', 'students.exams.answers', 'managers.school', 'trainers.school']);
 
+        // TODO(fahjan): optimize this by eager loading the relationships in the login method and caching the user data in the token or using a separate table for tokens with user data
+        // TODO(fahjan): return answers without questions to reduce the payload size and avoid circular references
         return new UserResource($user);
     }
 }
