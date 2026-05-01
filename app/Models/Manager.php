@@ -9,12 +9,13 @@ class Manager extends Model
     use \App\Traits\Search;
     use \App\Traits\UserTrait;
 
-    protected $fillable = ['school_id', 'user_id', 'photo', 'status', 'can_edit', 'can_delete'];
+    protected $fillable = ['school_id', 'user_id', 'photo', 'status', 'can_edit', 'can_delete', 'can_manage_managers'];
     protected $searchable = ['status'];
 
     protected $casts = [
         'can_edit' => 'boolean',
         'can_delete' => 'boolean',
+        'can_manage_managers' => 'boolean',
     ];
 
     public function school()
