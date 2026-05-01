@@ -12,8 +12,8 @@ return new class extends Migration {
     {
         Schema::table('managers', function (Blueprint $table) {
 
-            $table->boolean('can_edit')->default(false);
-            $table->boolean('can_delete')->default(false)->after('can_edit');
+            $table->boolean('can_edit')->default(true);
+            $table->boolean('can_delete')->default(true);
         });
     }
 
@@ -23,6 +23,7 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::table('managers', function (Blueprint $table) {
+            $table->dropColumn('can_edit');
             $table->dropColumn('can_delete');
         });
     }

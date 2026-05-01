@@ -12,6 +12,11 @@ class Manager extends Model
     protected $fillable = ['school_id', 'user_id', 'photo', 'status', 'can_edit', 'can_delete'];
     protected $searchable = ['status'];
 
+    protected $casts = [
+        'can_edit' => 'boolean',
+        'can_delete' => 'boolean',
+    ];
+
     public function school()
     {
         return $this->belongsTo(School::class);
