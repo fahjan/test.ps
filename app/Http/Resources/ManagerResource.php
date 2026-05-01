@@ -19,6 +19,7 @@ class ManagerResource extends JsonResource
             'id' => $this->id,
             'can_edit' => $this->can_edit,
             'can_delete' => $this->can_delete,
+            'can_manage_managers' => $this->can_manage_managers,
             'status' => $this->status,
             'user' => new SimpleUserResource($this->user),
             'creator' => new SimpleUserResource($this->creator),
