@@ -16,7 +16,10 @@ class ManagersController extends Controller
      */
     public function index(Request $request)
     {
-        $request->user()->managers()->where('school_id', $request->school_id)->firstOrFail();
+        $request->user()->managers()
+            ->where('school_id', $request->school_id)
+            ->with(['school', 'user', 'creator'])
+            ->firstOrFail();
 
         $managers = Manager::where('school_id', $request->school_id)->latest()->get();
         return ManagerResource::collection($managers);
