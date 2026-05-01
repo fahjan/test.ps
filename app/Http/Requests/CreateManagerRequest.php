@@ -25,6 +25,7 @@ class CreateManagerRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'mobile' => ['required', Rule::phone()->country(config('services.countries'))],
             'school_id' => 'required|exists:schools,id',
             'user_id' => [
                 'required',
@@ -41,6 +42,16 @@ class CreateManagerRequest extends FormRequest
             'status' => 'required|in:active,inactive',
 
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        $user = User::where('mobile', phone((string) $this->input('mobile'), config('services.countries')))->firstOrFail();
+
+        $this->merge([
+            'user_id' => $user->id,
+
+        ]);
     }
 
 }
