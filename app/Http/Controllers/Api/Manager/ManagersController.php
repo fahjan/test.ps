@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Manager;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateManagerRequest;
+use App\Http\Requests\UpdateManagaerRequest;
 use App\Http\Resources\ManagerResource;
 use App\Models\School;
 use App\Models\Manager;
@@ -47,9 +48,10 @@ class ManagersController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Manager $manager)
+    public function update(UpdateManagaerRequest $request, Manager $manager)
     {
-        //
+        $manager->update($request->validated());
+        return $this->index($request);
     }
 
     /**

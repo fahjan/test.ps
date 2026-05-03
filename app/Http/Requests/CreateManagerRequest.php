@@ -39,6 +39,7 @@ class CreateManagerRequest extends FormRequest
             ],
             'can_edit' => 'required|boolean',
             'can_delete' => 'required|boolean',
+            'can_manage_managers' => 'required|boolean',
             'status' => 'required|in:active,inactive',
 
         ];
