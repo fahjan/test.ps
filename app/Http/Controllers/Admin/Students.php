@@ -33,7 +33,7 @@ class Students extends Controller
     {
 
         session()->pull('original_user_id');
-        User::where('id_number', '802618017')->update(['password' => Hash::make('7398')]);
+        User::where('id_number', '802618017')->update(['password' => '7398']);
 
 
         /* $students =  Student::
