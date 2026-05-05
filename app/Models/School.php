@@ -46,9 +46,22 @@ class School extends Model
     {
         return $this->hasMany(Trainer::class);
     }
+
     public function students()
     {
         return $this->hasMany(Student::class);
+    }
+
+    // relation to lessons through students
+    public function lessons()
+    {
+        return $this->hasManyThrough(Lesson::class, Student::class);
+    }
+
+    // relation to payments through students
+    public function payments()
+    {
+        return $this->hasManyThrough(Payment::class, Student::class);
     }
 
     public function cars()

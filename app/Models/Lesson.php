@@ -33,12 +33,6 @@ class Lesson extends Model
         return $this->belongsTo(Car::class);
     }
 
-    // public function setLessonAtAttribute($date)
-    // {
-
-    //     $this->attributes['lesson_at'] = $date == null ? null : Carbon::createFromFormat('d/m/Y H:i', $date)->format('Y-m-d H:i:s');
-    // }
-
     public function rowClass(int $iteration)
     {
         $agreed_lessons = $this->student->agreed_lessons;
