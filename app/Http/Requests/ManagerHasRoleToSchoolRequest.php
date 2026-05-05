@@ -11,7 +11,6 @@ class ManagerHasRoleToSchoolRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
         return auth()->user()->managers()->where('school_id', $this->school->id)->exists();
     }
 
