@@ -23,7 +23,7 @@ class PaymentWithStudentResource extends JsonResource
             'invoice_number' => $this->invoice_number,
             'invoiced_at' => $this->invoiced_at,
             'student' => new SimpleStudentResource($this->student),
-            'creator' => new UserResource($this->creator),
+            'creator' => new SimpleUserResource($this->creator),
 
         ];
     }

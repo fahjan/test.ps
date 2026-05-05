@@ -21,7 +21,7 @@ class LessonResource extends JsonResource
             'car' => new CarResource($this->car),
             'student' => new SimpleStudentResource($this->student),
             'trainer' => new TrainerResource($this->trainer),
-            'creator' => new UserResource($this->creator),
+            'creator' => new SimpleUserResource($this->creator),
         ];
     }
 }
