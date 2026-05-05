@@ -9,8 +9,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class School extends Model
 {
-    // use Sortable;
-    use HasUuids;
+    // use HasUuids;
     use \App\Traits\Search;
 
     protected $fillable = [
