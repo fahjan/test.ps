@@ -14,10 +14,10 @@ class SchoolLessonsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(School $school, ManagerHasRoleToSchoolRequest $request)
+    public function index(School $school)
     {
         $lessons = $school->lessons()
-            ->when($request->has('student_id'), function ($query) use ($request) {
+            /* ->when($request->has('student_id'), function ($query) use ($request) {
                 $query->where('student_id', $request->student_id);
             })
             ->when($request->has('trainer_id'), function ($query) use ($request) {
@@ -34,7 +34,7 @@ class SchoolLessonsController extends Controller
             })
             ->when($request->has('to_date'), function ($query) use ($request) {
                 $query->whereDate('lesson_at', '<=', $request->to_date);
-            })
+            }) */
             ->with(['car', 'creator', 'trainer', 'student'])->simplePaginate();
 
         return LessonResource::collection($lessons);
