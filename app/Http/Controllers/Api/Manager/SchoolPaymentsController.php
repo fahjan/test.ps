@@ -33,7 +33,7 @@ class SchoolPaymentsController extends Controller
                 $query->whereDate('payment_at', '<=', $request->payment_at);
             })
 
-            ->with(['student', 'creator', 'kind'])->simplePaginate();
+            ->with(['student', 'creator', 'kind'])->latest()->simplePaginate();
 
         return PaymentWithStudentResource::collection($payments);
     }
