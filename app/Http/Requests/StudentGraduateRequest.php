@@ -44,6 +44,8 @@ class StudentGraduateRequest extends FormRequest
                     'license_id',
                     'exam_type',
                     'is_disabled',
+                    'agreed_lessons',
+                    'agreed_amount',
                 ]),
             ],
         ];
