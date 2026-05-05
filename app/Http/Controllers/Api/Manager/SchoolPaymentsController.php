@@ -14,9 +14,8 @@ class SchoolPaymentsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(ManagerHasRoleToSchoolRequest $request)
+    public function index(ManagerHasRoleToSchoolRequest $request, School $school)
     {
-        $school = School::find($request->school_id);
         $payments = $school->payments()
             ->when($request->has('student_id'), function ($query) use ($request) {
                 $query->where('student_id', $request->student_id);
