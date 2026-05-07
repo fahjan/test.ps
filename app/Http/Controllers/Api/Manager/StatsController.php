@@ -17,7 +17,6 @@ class StatsController extends Controller
         $students_count = $school->students()->count();
         $students_with_new_paid_status = $school->students()->where('paid_status', 'new')->count();
         $students_this_month = $school->students()->whereMonth('created_at', now()->month)->whereYear('created_at', now()->year)->count();
-        $trainers_count = $school->trainers()->count();
         $lessons_count = $school->lessons()->count();
         $payments_sum = $school->payments()->sum('amount');
 
@@ -25,7 +24,6 @@ class StatsController extends Controller
             'students_count',
             'students_with_new_paid_status',
             'students_this_month',
-            'trainers_count',
             'lessons_count',
             'payments_sum'
         ));
