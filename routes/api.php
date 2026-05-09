@@ -50,11 +50,14 @@ Route::middleware(['auth:sanctum', 'arabic_numbers'])->group(function () {
         Route::post('students/{student}/password-reset', [App\Http\Controllers\Api\Admin\Students::class, 'password_reset'])->name('students.password-reset');
         Route::post('schools/{school}/paid', [App\Http\Controllers\Api\Admin\SchoolsController::class, 'paid'])->name('schools.paid');
 
+        Route::get('stats', App\Http\Controllers\Api\Admin\StatsController::class)->name('stats');
+
         Route::apiResources([
             'students' => App\Http\Controllers\Api\Admin\Students::class,
             // 'trainers' => App\Http\Controllers\Api\Admin\Trainers::class,
             // 'cars' => App\Http\Controllers\Manager\Cars::class,
             'schools' => App\Http\Controllers\Api\Admin\SchoolsController::class,
+            // 'stats' => App\Http\Controllers\Api\Admin\StatsController::class,
             // 'schools.students' => App\Http\Controllers\Api\Admin\StudentsController::class,
             // 'lessons' => App\Http\Controllers\Manager\Lessons::class,
             // 'payments' => App\Http\Controllers\Manager\Payments::class,
