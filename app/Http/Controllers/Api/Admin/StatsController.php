@@ -17,8 +17,8 @@ class StatsController extends Controller
             ->get();
 
         return response()->json([
-            'students' => $students,
-            'students_by_day' => $students_by_day,
+            'students_count' => $students,
+            'students_by_day_count' => $students_by_day,
         ]);
 
 
