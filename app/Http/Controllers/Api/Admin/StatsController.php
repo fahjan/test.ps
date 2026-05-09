@@ -19,9 +19,12 @@ class StatsController extends Controller
             ->groupBy('date')
             ->orderBy('date', 'desc')
             ->get();
+        $students_this_week = \App\Models\Student::whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()])
+            ->count();
 
         return response()->json([
             'students_count' => $students,
+            'students_this_week' => $students_this_week,
             'students_this_month' => $students_this_month,
             'students_by_day_count' => $students_by_day,
         ]);
