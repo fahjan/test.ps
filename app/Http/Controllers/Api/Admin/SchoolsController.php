@@ -25,6 +25,7 @@ class SchoolsController extends Controller
             ->when($request->search, function ($q, $search) {
                 return $q->whereLike('title', '%' . $search . '%');
             })
+            ->orderByDesc('students_count')
             ->simplePaginate(10);
 
         return SchoolForAdminResource::collection($schools);
