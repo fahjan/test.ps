@@ -19,6 +19,7 @@ class Payout extends Model
         'school_id',
         'amount',
         'payment_method',
+        'payment_id',
         'notes',
         'paid_at',
     ];
