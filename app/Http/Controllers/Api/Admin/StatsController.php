@@ -36,7 +36,7 @@ class StatsController extends Controller
         //     ->orderBy('week', 'desc')
         //     ->get();
 
-        $monthlyCunts = Student::select(
+        $monthlyCounts = Student::select(
             DB::raw('YEAR(created_at) as year'),
             DB::raw('MONTH(created_at) as month'),
             DB::raw('count(*) as total')
@@ -55,7 +55,7 @@ class StatsController extends Controller
                 'students_by_day_count',
                 'students_this_week',
                 'students_this_month',
-                'monthlyCunts',
+                'monthlyCounts',
                 'payouts',
             )
         );
