@@ -26,7 +26,7 @@ class PayoutsController extends Controller
      */
     public function store(School $school, StoreSchoolPayoutRequest $request)
     {
-        $payout = $school->payouts()->created($request->validated());
+        $payout = $school->payouts()->create($request->validated());
         return new SchoolPayoutResource($payout);
 
     }
