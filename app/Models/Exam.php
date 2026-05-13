@@ -17,6 +17,7 @@ class Exam extends Model
         'created_at' => 'datetime:Y-m-d H:i:s',
         'finished_at' => 'datetime:Y-m-d H:i:s',
     ];
+
     protected $fillable = ['created_at', 'finished_at', 'student_id', 'grade', 'questions_count', 'application'];
 
     public function student()
