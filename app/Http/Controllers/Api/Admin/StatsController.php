@@ -52,6 +52,7 @@ class StatsController extends Controller
         return response()->json(
             compact(
                 'students_count',
+                'students_by_day_count',
                 'students_this_week',
                 'students_this_month',
                 'monthlyCunts',
