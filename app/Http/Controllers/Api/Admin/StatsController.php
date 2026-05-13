@@ -46,6 +46,14 @@ class StatsController extends Controller
             ->orderBy('month', 'desc')
             ->get();
 
+        $yearlyCounts = Student::select(
+            DB::raw('YEAR(created_at) as year'),
+            DB::raw('count(*) as total')
+        )
+            ->groupBy('year')
+            ->orderBy('year', 'desc')
+            ->get();
+
 
         $payouts = Payout::sum('amount');
 
@@ -56,6 +64,7 @@ class StatsController extends Controller
                 'students_this_week',
                 'students_this_month',
                 'monthlyCounts',
+                'yearlyCounts',
                 'payouts',
             )
         );
