@@ -13,7 +13,7 @@ class StatsController extends Controller
 
     public function __invoke(Request $request)
     {
-        $students = Student::count();
+        $students_count = Student::count();
 
         $students_this_week = Student::whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()])
             ->count();
@@ -21,7 +21,7 @@ class StatsController extends Controller
         $students_this_month = Student::whereBetween('created_at', [now()->startOfMonth(), now()->endOfMonth()])
             ->count();
 
-        $students_by_day = Student::selectRaw('DATE(created_at) as date, COUNT(*) as count')
+        $students_by_day_count = Student::selectRaw('DATE(created_at) as date, COUNT(*) as count')
             ->groupBy('date')
             ->orderBy('date', 'desc')
             ->get();
@@ -46,14 +46,18 @@ class StatsController extends Controller
             ->orderBy('month', 'desc')
             ->get();
 
-        return response()->json([
-            'students_count' => $students,
-            'students_this_week' => $students_this_week,
-            'students_this_month' => $students_this_month,
-            'students_by_day_count' => $students_by_day,
-            'monthlyCunts' => $monthlyCunts,
-        ]);
 
+        $payouts = Payout::sum('amount');
+
+        return response()->json(
+            compact(
+                'students_count',
+                'students_this_week',
+                'students_this_month',
+                'monthlyCunts',
+                'payouts',
+            )
+        );
 
     }
 
