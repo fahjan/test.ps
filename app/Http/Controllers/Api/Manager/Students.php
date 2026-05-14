@@ -111,7 +111,7 @@ class Students extends Controller
             ];
         }
 
-        $created_user->notify(new SendPassword(['message' => 'اسم المستخدم: ' . ltrim($user['mobile'], '97') . ' : ' . 'كلمة المرور: ' . $password . ', ' . url('/app')], $sms_provider));
+        $created_user->notify(new SendPassword(['message' => 'اسم المستخدم: ' . ltrim($user['mobile'], '97') . ' : ' . 'كلمة المرور: ' . $password . ', ' . url('/app') . ' - مدرسة ' . $school->title], $sms_provider));
 
     }
 
