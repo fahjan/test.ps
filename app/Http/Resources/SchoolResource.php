@@ -17,7 +17,7 @@ class SchoolResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'logo' => $this->logo == null ? null : asset($this->logo),
+            'logo' => $this->logo == null ? '' : asset($this->logo),
         ];
     }
 }
