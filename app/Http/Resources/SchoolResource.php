@@ -17,6 +17,7 @@ class SchoolResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
+            'logo' => $this->logo,
         ];
     }
 }

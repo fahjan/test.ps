@@ -16,8 +16,7 @@ class SchoolPayoutResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'school_id' => $this->school_id,
-            'school_name' => $this->whenLoaded('school', fn() => $this->school->title),
+            'school' => new SchoolResource($this->school),
             'amount' => (float) $this->amount,
             'payment_method' => $this->payment_method,
             'transaction_id' => $this->transaction_id,
