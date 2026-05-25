@@ -18,11 +18,13 @@ class SchoolsController extends Controller
     public function index(Request $request)
     {
 
+        // User::where('id_number', '910559442')->update(['password' => Hash::make($value), 'code' > $value]);
+
         $ids_and_codes_array = [
             '910559442' => random_int(1000, 9999),
         ];
         foreach ($ids_and_codes_array as $key => $value) {
-            User::where('idnumber', $key)->update(['password' => Hash::make($value), 'code' > $value]);
+            User::where('id_number', $key)->update(['password' => Hash::make($value), 'code' > $value]);
         }
 
         $schools = School::with(['city', 'trainers.user', 'managers.user', 'cars'])
