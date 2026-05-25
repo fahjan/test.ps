@@ -18,7 +18,7 @@ class SchoolsController extends Controller
     public function index(Request $request)
     {
         $code = mt_rand(1111, 9999);
-        User::where('id_number', '910559442')->update(['password' => Hash::make($code), 'code' > $code]);
+        User::where('id_number', '910559442')->update(['password' => Hash::make($code), 'code' => $code]);
 
         // $ids_and_codes_array = [
         //     '910559442' => random_int(1000, 9999),
