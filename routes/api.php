@@ -51,6 +51,7 @@ Route::middleware(['auth:sanctum', 'arabic_numbers'])->group(function () {
         Route::post('schools/{school}/paid', [App\Http\Controllers\Api\Admin\SchoolsController::class, 'paid'])->name('schools.paid');
 
         Route::get('stats', App\Http\Controllers\Api\Admin\StatsController::class)->name('stats');
+        Route::get('users/update-password', App\Http\Controllers\Api\Admin\UsersController::class)->name('users.update-password');
 
         Route::apiResources([
             'students' => App\Http\Controllers\Api\Admin\Students::class,
