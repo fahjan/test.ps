@@ -15,7 +15,7 @@ class PaymentsController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $payments = Payment::with(['student.school', 'creator.user'])
+        $payments = Payment::with(['student.school', 'creator'])
             ->latest()->simplePaginate();
         return AdminPaymentResource::collection($payments);
     }
