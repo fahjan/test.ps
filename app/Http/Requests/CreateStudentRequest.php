@@ -30,7 +30,18 @@ class CreateStudentRequest extends FormRequest
             'father_name' => 'required|string|max:199',
             'gfather_name' => 'required|string|max:199',
             'family_name' => 'required|string|max:199',
-            'id_number' => 'required|string|max:9|min:4',
+            // add rule for unique student id number with the same license type, and the same school
+
+            'id_number' => [
+                'required',
+                'string',
+                'max:9',
+                'min:4',
+                Rule::unique('students')->where(function ($query) {
+                    return $query->where('license_id', $this->input('license_id'))
+                        ->where('school_id', $this->input('school_id'));
+                }),
+            ],
             'dateofbirth' => 'required|date',
 
             'exam_type' => 'required',
@@ -59,5 +70,12 @@ class CreateStudentRequest extends FormRequest
         ]);
 
         return parent::getValidatorInstance();
+    }
+
+    public function messages(): array
+    {
+        return [
+            'id_number.unique' => 'هذا الطالب مسجل مسبقاً في نفس نوع الرخصة.',
+        ];
     }
 }
