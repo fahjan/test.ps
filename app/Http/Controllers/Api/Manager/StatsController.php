@@ -38,7 +38,6 @@ class StatsController extends Controller
             'students_this_month',
             'lessons_count',
             'payments_sum',
-            'exams_count',
             'today_exams_count',
 
         ));
