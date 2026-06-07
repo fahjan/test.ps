@@ -54,11 +54,11 @@ Route::middleware(['auth:sanctum', 'arabic_numbers'])->group(function () {
         Route::get('stats', App\Http\Controllers\Api\Admin\StatsController::class)->name('stats');
         Route::post('users/reset-password', App\Http\Controllers\Api\Admin\UsersController::class)->name('users.reset-password');
 
+        Route::get('payments', App\Http\Controllers\Api\Admin\PaymentsController::class)->name('payments.index');
         Route::apiResources([
             'students' => App\Http\Controllers\Api\Admin\Students::class,
             'schools' => App\Http\Controllers\Api\Admin\SchoolsController::class,
             'schools.payouts' => App\Http\Controllers\Api\Admin\PayoutsController::class,
-
         ]);
     });
 
