@@ -19,6 +19,7 @@ Route::middleware(['auth:sanctum', 'arabic_numbers'])->group(function () {
 
     Route::prefix('manager')->group(function () { //->middleware(['role:manager'])
 
+        Route::get('stats', App\Http\Controllers\Api\Manager\StatsController::class)->name('manager.stats');
         Route::apiResources([
             'students' => App\Http\Controllers\Api\Manager\Students::class,
             'students.exams' => App\Http\Controllers\Api\Manager\ExamsController::class,
@@ -31,7 +32,7 @@ Route::middleware(['auth:sanctum', 'arabic_numbers'])->group(function () {
 
             'schools.lessons' => App\Http\Controllers\Api\Manager\SchoolLessonsController::class,
             'schools.payments' => App\Http\Controllers\Api\Manager\SchoolPaymentsController::class,
-            'schools.stats' => App\Http\Controllers\Api\Manager\StatsController::class,
+
             // 'messages' => App\Http\Controllers\Manager\Messages::class,
 
         ]);
