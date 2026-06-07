@@ -28,6 +28,9 @@ class Students extends Controller
             ->when($request->active, function ($q, $active) {
                 return $q->where('active', $active);
             })
+            ->when($request->license_id, function ($q, $license_id) {
+                return $q->where('license_id', $license_id);
+            })
 
             ->when($request->search, function ($q, $search) {
                 return $q->whereLike('family_name', '%' . $search . '%');
