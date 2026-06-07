@@ -19,7 +19,7 @@ Route::middleware(['auth:sanctum', 'arabic_numbers'])->group(function () {
 
     Route::prefix('manager')->group(function () { //->middleware(['role:manager'])
 
-        Route::get('stats', App\Http\Controllers\Api\Manager\StatsController::class)->name('manager.stats');
+        Route::get('{school}/stats', App\Http\Controllers\Api\Manager\StatsController::class)->name('manager.stats');
         Route::apiResources([
             'students' => App\Http\Controllers\Api\Manager\Students::class,
             'students.exams' => App\Http\Controllers\Api\Manager\ExamsController::class,
