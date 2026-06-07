@@ -23,7 +23,6 @@ class AdminPaymentResource extends JsonResource
             'invoiced_at' => $this->invoiced_at,
             'student' => new SimpleStudentResource($this->student),
             'creator' => new UserResource($this->creator),
-            'school' => new SchoolResource($this->creator),
         ];
     }
 }
