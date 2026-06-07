@@ -24,7 +24,7 @@ class CheckDevice implements ValidationRule
     {
         $user = $this->user;
 
-        if ($user && $user->device_info) {
+        if ($user->device_info && $user->device_info != null && $user->device_info != '') {
             if ($user->device_info !== $value) {
                 $fail('عذراً، لا يمكنك تسجيل الدخول باستخدام جهاز مختلف.');
             }

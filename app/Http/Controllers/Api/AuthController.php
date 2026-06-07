@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Rules\CheckDevice;
 use Illuminate\Http\Request;
 use App\Http\Requests\Api\LoginRequest;
 use Illuminate\Support\Str;
@@ -31,6 +30,8 @@ class AuthController extends Controller
             $user = User::where('mobile', $request->mobile)->first();
             $user->load(['roles', 'students.school', 'students.license', 'students.exams.answers', 'managers.school', 'trainers.school']);
 
+            // $user->load(['students.exams.answers']);
+
             return new UserResource($user);
 
         }
@@ -38,10 +39,18 @@ class AuthController extends Controller
 
         $user = User::where('mobile', $request->mobile)->first();
 
+        $request->validate([
+            'device_info' => ['required', 'string', ''],
+        ]);
+
+
         if (!in_array($request->mobile, $this->allowedUsers)) {
-            $request->validate([
-                'device_info' => ['required', new CheckDevice($user)],
-            ]);
+            if ($user->device_info != null && $user->device_info != $request->device_info) {
+
+                throw ValidationException::withMessages([
+                    'message' => [__('Already on anothe device')],
+                ]);
+            }
         }
 
         if (Auth::attempt($credentials)) {
