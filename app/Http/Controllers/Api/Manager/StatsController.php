@@ -16,7 +16,13 @@ class StatsController extends Controller
     public function __invoke(School $school, ManagerHasRoleToSchoolRequest $request)
     {
         $students_with_new_paid_status = $school->students()->where('paid_status', 'new')->count();
+
         $students_this_month = $school->students()->whereMonth('created_at', now()->month)->whereYear('created_at', now()->year)->count();
+
+        $students_this_day = $school->students()->whereDate('created_at', now())->count();
+
+        $students_this_week = $school->students()->whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()])->count();
+
 
         $today_exams_count = Exam::whereHas('student', function ($query) use ($school) {
             $query->where('school_id', $school->id);
@@ -39,6 +45,8 @@ class StatsController extends Controller
             'lessons_count',
             'payments_sum',
             'today_exams_count',
+            'students_this_day',
+            'students_this_week',
 
         ));
 
