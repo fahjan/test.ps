@@ -31,19 +31,12 @@ class AuthController extends Controller
             $user = User::where('mobile', $request->mobile)->first();
             $user->load(['roles', 'students.school', 'students.license', 'students.exams.answers', 'managers.school', 'trainers.school']);
 
-            // $user->load(['students.exams.answers']);
-
             return new UserResource($user);
 
         }
 
 
         $user = User::where('mobile', $request->mobile)->first();
-
-        $request->validate([
-            'device_info' => ['required', 'string', ''],
-        ]);
-
 
         if (!in_array($request->mobile, $this->allowedUsers)) {
             $request->validate([
