@@ -23,9 +23,10 @@ class StatsController extends Controller
 
         $school->loadCount('students', 'lessons');
         $school->loadSum('payments', 'amount');
+
         $students_count = $school->students_count;
-        $lessons_count = $school->lessons_count;
-        $payments_sum = $school->payments_sum;
+        $lessons_count = $school->lessons_count ?? 0;
+        $payments_sum = $school->payments_sum ?? 0;
 
 
         return response()->json(compact(
