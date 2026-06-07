@@ -42,12 +42,6 @@ class AuthController extends Controller
             $request->validate([
                 'device_info' => ['required', new CheckDevice($user)],
             ]);
-            // if ($user->device_info != null && $user->device_info != $request->device_info) {
-
-            //     throw ValidationException::withMessages([
-            //         'message' => [__('Already on anothe device')],
-            //     ]);
-            // }
         }
 
         if (Auth::attempt($credentials)) {
