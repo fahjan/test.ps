@@ -39,7 +39,7 @@ class CreateStudentRequest extends FormRequest
                 'min:4',
                 Rule::unique('students')->where(function ($query) {
                     return $query->where('license_id', $this->input('license_id'))
-                        ->where('school_id', $this->input('school_id'));
+                        ->where('school_id', $this->input('school_id'))->whereNull('deleted_at');
                 }),
             ],
             'dateofbirth' => 'required|date',
