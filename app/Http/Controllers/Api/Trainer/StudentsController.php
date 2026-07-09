@@ -16,7 +16,7 @@ class StudentsController extends Controller
     public function index(Request $request)
     {
 
-        $trainser = auth()->user()->trainers()->where('school_id', $request->school_id)->first();
+        $trainser = auth()->user()->trainers()->where('school_id', $request->school_id)->firstOrFail();
         if ($trainser->status == 'inactive') {
             return response()->json(['data' => []]);
         }
