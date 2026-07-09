@@ -16,6 +16,11 @@ class StudentsController extends Controller
     public function index(Request $request)
     {
 
+        $trainser = auth()->user()->trainers()->where('school_id', $request->school_id)->first();
+        if ($trainser->status == 'inactive') {
+            return response()->json(['data' => []]);
+        }
+
         $students = Student::where("school_id", $request->school_id)
             ->where("is_disabled", false)
             ->where(function ($query) use ($request) {

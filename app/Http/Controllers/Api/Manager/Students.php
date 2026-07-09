@@ -23,16 +23,12 @@ class Students extends Controller
     public function index(ManagerCanViewStudentsBySchoolIdRequest $request)
     {
 
-        $black_list_users = [
-            'ef853351-a43e-4c45-a492-d38289bf9ca3',
-            'f39fd706-543d-47c0-bd66-5ddf466fd58a',
 
-        ];
-
-        if (in_array($request->user()->id, $black_list_users)) {
-            return '';
-
+        $manager = auth()->user()->managers()->where('school_id', $request->school_id)->first();
+        if ($manager->status == 'inactive') {
+            return response()->json(['data' => []]);
         }
+
 
         $students = Student::where('school_id', $request->school_id)
             ->with(['user'])
@@ -61,6 +57,11 @@ class Students extends Controller
 
     public function store(CreateStudentRequest $request)
     {
+
+        $manager = auth()->user()->managers()->where('school_id', $request->school_id)->first();
+        if ($manager->status == 'inactive') {
+            return response()->json(['data' => []]);
+        }
 
         $data = $request->validated();
 
