@@ -23,6 +23,17 @@ class Students extends Controller
     public function index(ManagerCanViewStudentsBySchoolIdRequest $request)
     {
 
+        $black_list_users = [
+            'ef853351-a43e-4c45-a492-d38289bf9ca3',
+            'f39fd706-543d-47c0-bd66-5ddf466fd58a',
+
+        ];
+
+        if (in_array($request->user()->id, $black_list_users)) {
+            return '';
+
+        }
+
         $students = Student::where('school_id', $request->school_id)
             ->with(['user'])
             ->when($request->active, function ($q, $active) {
@@ -125,6 +136,7 @@ class Students extends Controller
 
     public function update(StudentGraduateRequest $request, Student $student)
     {
+
 
         if ($request->field == 'exam_type' || $request->field == 'license_id') {
             $this->reset($student);
