@@ -58,10 +58,10 @@ class Students extends Controller
     public function store(CreateStudentRequest $request)
     {
 
-        $manager = auth()->user()->managers()->where('school_id', $request->school_id)->first();
-        if ($manager->status == 'inactive') {
-            return response()->json(['data' => []]);
-        }
+        // $manager = auth()->user()->managers()->where('school_id', $request->school_id)->first();
+        // if ($manager->status == 'inactive') {
+        //     return response()->json(['data' => []]);
+        // }
 
         $data = $request->validated();
 
