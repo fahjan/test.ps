@@ -103,5 +103,10 @@ class User extends Authenticatable
         return $this->hasOne(Trainer::class)->latest()->first()->school();
     }
 
+    public function routeNotificationForFcm()
+    {
+        // Return a single token string, or an array of tokens for multiple devices
+        return $this->fcm_token ?? '';
+    }
 
 }
