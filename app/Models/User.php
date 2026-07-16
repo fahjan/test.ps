@@ -102,4 +102,6 @@ class User extends Authenticatable
     {
         return $this->hasOne(Trainer::class)->latest()->first()->school();
     }
+
+
 }
