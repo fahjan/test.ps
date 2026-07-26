@@ -10,6 +10,7 @@ use App\Models\Lecture;
 use App\Models\School;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SchoolLecturesController extends Controller
 {
@@ -75,15 +76,25 @@ class SchoolLecturesController extends Controller
     {
         $this->authorize('update', [Lecture::class, $lecture]);
 
-        $finalData = array_map(function ($lecture) use ($school) {
-            return [
-                'id' => $lecture['id'],
-                'sort_order' => $lecture['sort_order'],
-                'user_id' => auth()->id(),
-            ];
-        }, $request->input('lectures'));
+        // $finalData = array_map(function ($lecture) use ($school) {
+        //     return [
+        //         'id' => $lecture['id'],
+        //         'sort_order' => $lecture['sort_order'],
+        //         'user_id' => auth()->id(),
+        //     ];
+        // }, $request->input('lectures'));
 
-        $school->lectures()->upsert($finalData, ['id'], ['sort_order']);
+        // $school->lectures()->upsert($finalData, ['id'], ['sort_order']);
+        $lecturesData = $request->input('lectures');
+
+        // 2. استخدام Transaction لتحديث قاعدة البيانات بسرعة وأمان دفعة واحدة
+        DB::transaction(function () use ($lecturesData) {
+            foreach ($lecturesData as $item) {
+                Lecture::where('id', $item['id'])->update([
+                    'sort_order' => $item['sort_order']
+                ]);
+            }
+        });
 
         return response()->json([
             'status' => 'success',
