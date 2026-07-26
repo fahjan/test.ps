@@ -42,6 +42,11 @@ class School extends Model
         return $this->hasMany(Manager::class);
     }
 
+    public function lectures()
+    {
+        return $this->hasMany(Lecture::class);
+    }
+
     public function trainers()
     {
         return $this->hasMany(Trainer::class);

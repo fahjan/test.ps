@@ -109,4 +109,8 @@ class User extends Authenticatable
         return $this->fcm_token ?? '';
     }
 
+    public function lectures()
+    {
+        return $this->hasMany(Lecture::class);
+    }
 }
