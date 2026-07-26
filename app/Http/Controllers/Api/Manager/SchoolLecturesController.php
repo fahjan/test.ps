@@ -44,6 +44,7 @@ class SchoolLecturesController extends Controller
 
         $lecture = $school->lectures()->create([
             'user_id' => auth()->id(),
+            'title' => $request->string('title'),
             'content' => $request->string('content'),
             'video_url' => $request->string('video_url'),
             'sort_order' => $school->lectures()->count() + 1,
