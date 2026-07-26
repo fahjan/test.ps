@@ -75,7 +75,15 @@ class SchoolLecturesController extends Controller
     {
         $this->authorize('update', [Lecture::class, $lecture]);
 
-        $school->lectures()->upsert($request->input('lectures'), ['id'], ['sort_order']);
+        $finalData = array_map(function ($lecture) use ($school) {
+            return [
+                'id' => $lecture['id'],
+                'sort_order' => $lecture['sort_order'],
+                'user_id' => auth()->id(),
+            ];
+        }, $request->input('lectures'));
+
+        $school->lectures()->upsert($finalData, ['id'], ['sort_order']);
 
         return response()->json([
             'status' => 'success',
