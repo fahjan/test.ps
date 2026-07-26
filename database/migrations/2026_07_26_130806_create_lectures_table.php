@@ -14,7 +14,11 @@ return new class extends Migration {
             $table->id();
             $table->timestamps();
             $table->foreignId('school_id')->constrained();
-            $table->foreignUuid('user_id')->constrained();
+            // $table->foreignUuid('user_id')->constrained();
+            $table->uuid('user_id')->index();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
+
 
 
             $table->string('title');
