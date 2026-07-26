@@ -13,6 +13,7 @@ return new class extends Migration {
         Schema::create('lectures', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->softDeletes();
             $table->foreignId('school_id')->constrained();
             $table->foreignUuid('user_id')->constrained();
 
