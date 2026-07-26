@@ -24,6 +24,10 @@ class SchoolLecturesController extends Controller
 
         $lectures = $school->lectures()->orderBy('sort_order')->with(['school', 'user'])->get();
 
+        if (request()->page > 1) {
+            return response()->json(['data' => []]);
+        }
+
         return LecturesResource::collection($lectures);
     }
 
