@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Student\SchoolLecturesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
@@ -66,6 +67,7 @@ Route::middleware(['auth:sanctum', 'arabic_numbers'])->group(function () {
 
     Route::prefix('students')->group(function () {//->middleware(['role:student'])
         Route::resource('exams', App\Http\Controllers\Api\Student\ExamsController::class)->only('store', 'index');
+        Route::get('schools/{school}/lectures', SchoolLecturesController::class);
 
 
 

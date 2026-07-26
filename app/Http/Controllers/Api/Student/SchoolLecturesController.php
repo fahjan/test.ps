@@ -1,10 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Api\Manager;
+namespace App\Http\Controllers\Api\Student;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\LectureCreateRequest;
-use App\Http\Requests\LectureReorderRequest;
 use App\Http\Resources\LecturesResource;
 use App\Models\Lecture;
 use App\Models\School;
@@ -16,13 +14,14 @@ class SchoolLecturesController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(School $school)
+    public function __invoke(School $school)
     {
-        $this->authorize('view', [Lecture::class, $school]);
-
+        $this->authorize('viewAll', [Lecture::class, $school]);
         $lectures = $school->lectures()->orderBy('sort_order')->with(['school', 'user'])->get();
-
         return LecturesResource::collection($lectures);
+
+
+
     }
 
     /**
@@ -36,17 +35,9 @@ class SchoolLecturesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(LectureCreateRequest $request, School $school)
+    public function store(Request $request, School $school)
     {
-        $this->authorize('create', [Lecture::class, $school]);
-
-        $lecture = $school->lectures()->create([
-            'user_id' => auth()->id(),
-            'content' => $request->string('content'),
-            'video_url' => $request->string('video_url'),
-            'sort_order' => $school->lectures()->count() + 1,
-        ]);
-        return LecturesResource::make($lecture);
+        //
     }
 
     /**
@@ -68,16 +59,9 @@ class SchoolLecturesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(LectureReorderRequest $request, School $school, Lecture $lecture)
+    public function update(Request $request, School $school, Lecture $lecture)
     {
-        $this->authorize('update', [Lecture::class, $lecture]);
-
-        Lecture::upsert($request->input('lectures'), ['id'], ['sort_order']);
-
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Lectures reordered successfully.'
-        ]);
+        //
     }
 
     /**
@@ -85,9 +69,6 @@ class SchoolLecturesController extends Controller
      */
     public function destroy(School $school, Lecture $lecture)
     {
-        $this->authorize('delete', [Lecture::class, $lecture]);
-
-        return $lecture->delete();
-
+        //
     }
 }

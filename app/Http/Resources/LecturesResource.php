@@ -20,8 +20,8 @@ class LecturesResource extends JsonResource
             'content' => $this->content,
             'video_url' => $this->video_url,
             'sort_order' => $this->sort_order,
-            'user' => UserSimpleResource::make($this->user),
-            'school' => SchoolResource::make($this->school),
+            // 'user' => UserSimpleResource::make($this->user),
+            // 'school' => SchoolResource::make($this->school),
         ];
     }
 }
