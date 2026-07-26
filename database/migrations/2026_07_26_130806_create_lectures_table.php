@@ -14,7 +14,8 @@ return new class extends Migration {
             $table->id();
             $table->timestamps();
             $table->foreignId('school_id')->constrained();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignUuid('user_id')->constrained();
+
 
             $table->string('title');
             $table->text('content')->nullable();
