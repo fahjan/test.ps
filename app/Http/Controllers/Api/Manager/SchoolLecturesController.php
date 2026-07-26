@@ -13,6 +13,8 @@ use Illuminate\Http\Request;
 
 class SchoolLecturesController extends Controller
 {
+    use AuthorizesRequests;
+
     /**
      * Display a listing of the resource.
      */

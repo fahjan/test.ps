@@ -11,12 +11,15 @@ use Illuminate\Http\Request;
 
 class SchoolLecturesController extends Controller
 {
+    use AuthorizesRequests;
+
     /**
      * Display a listing of the resource.
      */
     public function __invoke(School $school)
     {
         $this->authorize('viewAll', [Lecture::class, $school]);
+
         $lectures = $school->lectures()->orderBy('sort_order')->with(['school', 'user'])->get();
         return LecturesResource::collection($lectures);
 
