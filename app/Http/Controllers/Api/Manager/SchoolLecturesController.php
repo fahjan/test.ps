@@ -20,7 +20,7 @@ class SchoolLecturesController extends Controller
      */
     public function index(School $school)
     {
-        $this->authorize('view', [Lecture::class, $school]);
+        $this->authorize('viewAny', [Lecture::class, $school]);
 
         $lectures = $school->lectures()->orderBy('sort_order')->with(['school', 'user'])->get();
 

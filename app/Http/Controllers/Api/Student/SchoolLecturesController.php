@@ -18,7 +18,7 @@ class SchoolLecturesController extends Controller
      */
     public function __invoke(School $school)
     {
-        $this->authorize('viewAll', [Lecture::class, $school]);
+        $this->authorize('viewAny', [Lecture::class, $school]);
 
         $lectures = $school->lectures()->orderBy('sort_order')->with(['school', 'user'])->get();
         return LecturesResource::collection($lectures);
