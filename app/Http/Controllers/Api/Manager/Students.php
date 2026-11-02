@@ -152,6 +152,10 @@ class Students extends Controller
 
     public function destroy(DeleteStudentRequest $request, Student $student)
     {
+        if ($student->user->device_info != null) {
+            return false;
+        }
+
         return $student->delete();
     }
 
